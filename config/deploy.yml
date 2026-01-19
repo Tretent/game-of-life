@@ -2,12 +2,12 @@
 service: game_of_life
 
 # Name of the container image (use your-user/app-name on external registries).
-image: game_of_life
+image: tretent/game-of-life
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 192.168.0.92
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -20,21 +20,21 @@ servers:
 #
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
 #
-# proxy:
-#   ssl: true
-#   host: app.example.com
+proxy:
+  ssl: true
+  host: gol.pasqualiroberto.it
 
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  server: localhost:5555
+  server: registry-1.docker.io
 
   # Needed for authenticated registries.
-  # username: your-user
+  username: tretent
 
   # Always use an access token rather than real password when possible.
-  # password:
-  #   - KAMAL_REGISTRY_PASSWORD
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
@@ -79,6 +79,7 @@ asset_path: /rails/public/assets
 # Configure the image builder.
 builder:
   arch: amd64
+  remote: ssh://roberto@192.168.0.92
 
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
   # remote: ssh://docker@docker-builder-server
@@ -91,8 +92,8 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: roberto
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
