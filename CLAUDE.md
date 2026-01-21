@@ -54,11 +54,20 @@ Based on requirements from [Extendi Game of Life](https://github.com/extendi/gam
 - **Database**: SQLite3 (stored in `storage/` directory)
 - **Asset Pipeline**: Propshaft
 - **JavaScript**: Importmap with Hotwire (Turbo + Stimulus)
-- **Styling**: Tailwind CSS
 - **Background Jobs**: Solid Queue
 - **Caching**: Solid Cache
 - **WebSockets**: Solid Cable
 - **Deployment**: Kamal (Docker-based)
+
+### Game Logic (`app/services/game_of_life/`)
+
+The core game logic is implemented as POROs (Plain Old Ruby Objects) in the `GameOfLife` module:
+
+- **Cell** - Represents a single cell with alive/dead state and mutation methods (`live`, `die`)
+- **GameBoard** - 2D grid of cells, handles seeding, iteration, and state comparison. Includes `Enumerable` for cell traversal.
+- **Game** - Orchestrates the simulation: initializes board, runs evolution loop, detects termination conditions (barren board, static state, generation limit)
+
+The `cell_fate` method implements Conway's rules by counting live neighbors within grid bounds.
 
 ## Development Tools
 
