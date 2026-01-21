@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: First game
+  rows: 10
+  columns: 15
+
+two:
+  name: Second game
+  rows: 20
+  columns: 5

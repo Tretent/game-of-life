@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "games#index"
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  resources :games, only: %i[index]
 end
