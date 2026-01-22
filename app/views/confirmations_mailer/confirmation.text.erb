@@ -1,0 +1,5 @@
+Welcome to Game of Life! Please confirm your email by visiting:
+
+<%= confirmation_url(@user.generate_token_for(:email_confirmation)) %>
+
+This link will expire in 24 hours.

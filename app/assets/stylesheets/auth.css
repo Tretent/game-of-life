@@ -1,0 +1,37 @@
+/*
+ * Game of Life - Authentication Styles
+ */
+
+/* Auth pages */
+.auth-container {
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-container form {
+  max-width: none;
+}
+
+.auth-container input[type="submit"] {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.auth-links {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.auth-links p {
+  margin: 0.5rem 0;
+}
