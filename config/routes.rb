@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   resource :session
+  resource :registration, only: [ :new, :create ]
+  resources :confirmations, param: :token, only: [ :new, :create, :show ]
   resources :passwords, param: :token
 
-  resources :games, only: %i[index]
+  resources :games, only: [ :index, :new, :create, :show, :destroy ]
 end
