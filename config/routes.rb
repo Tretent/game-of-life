@@ -19,5 +19,14 @@ Rails.application.routes.draw do
   resources :confirmations, param: :token, only: [ :new, :create, :show ]
   resources :passwords, param: :token
 
-  resources :games, only: [ :index, :new, :create, :show, :destroy ]
+  resources :games, only: [ :index, :new, :create, :show, :destroy ] do
+    collection do
+      get :customize
+      post :customize
+    end
+    member do
+      post :next_generation
+      post :reset
+    end
+  end
 end
