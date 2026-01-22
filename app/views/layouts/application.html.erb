@@ -19,11 +19,25 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "game", "auth", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <% if authenticated? %>
+      <header class="site-header">
+        <%= button_to "Logout", session_path, method: :delete, class: "btn btn-secondary" %>
+      </header>
+    <% end %>
+
+    <main class="container">
+      <% if flash[:notice].present? %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert].present? %>
+        <div class="alert"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
