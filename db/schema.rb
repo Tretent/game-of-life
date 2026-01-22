@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_22_102138) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_22_151715) do
   create_table "games", force: :cascade do |t|
     t.integer "columns", default: 10
     t.datetime "created_at", null: false
+    t.boolean "draft", default: false, null: false
     t.json "history", default: []
     t.string "name"
     t.integer "rows", default: 10
@@ -32,6 +33,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_22_102138) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.string "email_address", null: false
     t.string "password_digest", null: false
