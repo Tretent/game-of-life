@@ -6,9 +6,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
-      start_new_session_for user
-      redirect_to after_authentication_url
+    if (user = User.authenticate_by(session_params))
+      if user.confirmed?
+        start_new_session_for user
+        redirect_to after_authentication_url
+      else
+        redirect_to new_confirmation_path, alert: "Please confirm your email address first."
+      end
     else
       redirect_to new_session_path, alert: "Try another email address or password."
     end
@@ -17,5 +21,11 @@ class SessionsController < ApplicationController
   def destroy
     terminate_session
     redirect_to new_session_path, status: :see_other
+  end
+
+  private
+
+  def session_params
+    params.expect(sesssion: [ :email_address, :password ])
   end
 end

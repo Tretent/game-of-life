@@ -44,7 +44,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   test "unconfirmed user cannot sign in" do
     user = User.create!(email_address: "unconfirmed@example.com", password: "password")
 
-    post session_path, params: { email_address: user.email_address, password: "password" }
+    post session_path, params: { session: { email_address: user.email_address, password: "password" } }
 
     assert_redirected_to new_confirmation_path
     assert_nil cookies[:session_id]
