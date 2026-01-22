@@ -135,6 +135,17 @@ label {
     font-size: 0.875rem;
 }
 
+.form-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.form-actions .btn {
+    min-width: 100px;
+    text-align: center;
+}
+
 /* Buttons */
 button,
 input[type="submit"],
