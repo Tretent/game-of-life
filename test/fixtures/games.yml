@@ -4,8 +4,10 @@ one:
   name: First game
   rows: 10
   columns: 15
+  user: one
 
 two:
   name: Second game
   rows: 20
   columns: 5
+  user: one
