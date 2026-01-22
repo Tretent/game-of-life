@@ -1,7 +1,6 @@
 module GameOfLife
   class Evolution
     def initialize(grid)
-      # TODO: check grid is not null
       @grid = grid || []
       @rows = grid.length
       @columns = grid.first&.length || 0
