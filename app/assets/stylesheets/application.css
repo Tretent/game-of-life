@@ -1,10 +1,31 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Game of Life - Base Application Styles
  */
+
+/* Error messages */
+.error {
+  color: #dc3545;
+  margin: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.notice {
+  color: #28a745;
+  margin: 0.5rem 0;
+}
+
+.alert {
+  color: #dc3545;
+  margin: 0.5rem 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
