@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 255 }
   validates :rows, :columns, presence: true, numericality: { greater_than: 0, less_than: 100 }
 
   def current_generation
