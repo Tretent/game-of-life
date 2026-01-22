@@ -2,7 +2,7 @@
 
 This project is a web-based implementation of **Conway's Game of Life**.
 
-The application allows users to set up and interact with a grid of cells that evolve over time based on the classic rules of the zero-player game devised by John Conway.
+The application allows users to set up and interact with a grid of cells that evolve over time based on a variation of the classic rules of the zero-player game devised by John Conway.
 
 ## Project Overview
 
@@ -19,27 +19,28 @@ For this variant, the grid is considered to be finite and no life can exist off 
 
 ## Key Features
 
-- **User Authentication**: Secure access with e-mail and password.
+- **User Authentication**: Secure access with e-mail and password. The user can log in and sign up.
 - **File Upload & Validation**: Upload initial patterns via file input with format validation.
 - **Dynamic Matrix**: The grid automatically adjusts its size based on the uploaded input file.
+- **Matrix editing**: Users can edit the uploaded grid by clicking on cells to toggle their state.
 - **Server-Side Evolution**: All generation calculations are performed on the server to ensure logic consistency.
 - **Real-time Updates**: The UI reflects the state of the matrix at each iteration using modern Rails techniques (Turbo/Stimulus).
-- **Generation Scrubbing**: Navigate through the history of the simulation with the ability to slide through generations both backward and forward.
-- **Simulation Control**: A dedicated "Start" button to trigger and visualize the evolution process.
+- **Simulation Control**: A dedicated "Play" button to trigger and visualize the evolution process. "Pause" and "Step" buttons for fine-grained control.
 
 ## Tech Stack
 
 - **Ruby**: 4.0.1
 - **Framework**: Rails 8.1.2
 - **Database**: SQLite3 (using `Solid Cache`, `Solid Queue`, and `Solid Cable` for modern Rails 8 defaults)
-- **Frontend**: Hotwire (Turbo & Stimulus) with Importmaps (no Node.js build step required)
-- **Deployment**: Kamal (Docker-based)
+- **Frontend**: Hotwire (Turbo & Stimulus) with Importmaps
+- **Deployment**: Kamal 2 (Docker-based)
 
 ## Getting Started
 
 ### Prerequisites
-- Ruby 4.0.1 (managed via `mise` or your preferred version manager)
+- Ruby 4.0.1 (managed via `mise` or your preferred version manager. See [mise documentation](https://mise.jdx.dev/getting-started.html))
 - SQLite3
+- Docker for production deployment (see Kamal guides)
 
 ### Installation
 1. Clone the repository:
@@ -64,18 +65,19 @@ For this variant, the grid is considered to be finite and no life can exist off 
 Based on the required solution implementation, the application provides the following functionality:
 
 ### 1. Grid Interaction
-- **Define Grid Size**: Users can specify the dimensions of the grid (number of rows and columns).
+- **Define Grid Size**: Users can specify the dimensions of the grid (number of rows and columns) via file input.
+- **Define generation**: Users can specify the current generation to start the simulation from via file input.
+- **Define a name**: Users can specify a name for the simulation.
 - **Manual Toggle**: You can click on individual cells to toggle their state between *alive* and *dead* before starting the simulation.
-- **Random Generation**: A "Random" button is available to populate the grid with a random initial state.
 
 ### 2. Simulation Control
 - **Next Step**: Manually evolve the grid by one generation.
-- **Auto-Play/Pause**: Start an automated simulation that evolves at a set interval, or pause it at any time to inspect the current state.
+- **Play/Pause**: Start an automated simulation that evolves at a set interval, or pause it at any time to inspect the current state.
 - **Reset**: Clear the grid or return to the initial state.
 
 ### 3. State Management
-- **Persistence**: The application allows you to save the current state of the grid to the database.
-- **Retrieval**: You can view a list of saved games and reload them to continue the simulation or use them as a starting point.
+- **Persistence**: The application saves the current state of the grid to the database.
+- **Retrieval**: You can view a list of saved games and reload them.
 
 ## Testing & Quality
 
@@ -92,3 +94,6 @@ To ensure code quality and functionality, the following tools are used:
 
 - **Email**: In development, sent emails can be viewed at `/letter_opener`.
 - **Infrastructure**: The project uses Rails 8's "Solid" stack, replacing Redis with SQLite-backed alternatives for Caching, Queuing, and Pub/Sub.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
