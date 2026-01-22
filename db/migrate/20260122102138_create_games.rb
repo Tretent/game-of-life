@@ -5,6 +5,7 @@ class CreateGames < ActiveRecord::Migration[8.1]
       t.json :history, default: []
       t.integer :rows, default: 10
       t.integer :columns, default: 10
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
