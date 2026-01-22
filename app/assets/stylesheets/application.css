@@ -176,6 +176,27 @@ input[type="submit"]:hover,
     background-color: #c82333;
 }
 
+button:disabled,
+input[type="submit"]:disabled,
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:disabled:hover,
+input[type="submit"]:disabled:hover,
+.btn:disabled:hover {
+    background-color: #0066cc;
+}
+
+.btn-secondary:disabled:hover {
+    background-color: #6c757d;
+}
+
+.btn-danger:disabled:hover {
+    background-color: #dc3545;
+}
+
 /* Error messages */
 .error {
     color: #dc3545;
