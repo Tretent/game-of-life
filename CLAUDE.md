@@ -1,3 +1,4 @@
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -9,11 +10,10 @@ Web-based implementation of **Conway's Game of Life** - Ruby on Rails 8.1 with R
 Based on requirements from [Extendi Game of Life](https://github.com/extendi/game-of-life).
 
 ### Key Features
-- User authentication (email/password)
-- File upload for initial patterns (grid auto-sizes)
-- Grid interaction: manual toggle
-- Simulation controls: next step, previous step, auto-play/pause, reset
-- Generation scrubbing (navigate backward/forward through history)
+- User authentication (sign in and sign up processes)
+- File upload for initial patterns with validation
+- Grid interaction: cell toggling via click (dimensions read-only)
+- Simulation controls: Play, Pause, Next step, Reset (music player style)
 - Server-side evolution calculations
 - Real-time UI updates via Turbo/Stimulus
 
@@ -22,6 +22,75 @@ Based on requirements from [Extendi Game of Life](https://github.com/extendi/gam
 2. Live cell with 2-3 neighbors survives
 3. Live cell with >3 neighbors dies (overpopulation)
 4. Dead cell with exactly 3 neighbors becomes alive (reproduction)
+
+## Feature Specifications
+
+### 1. User Authentication
+The application includes complete authentication flows:
+- **Sign Up**: New users register with email and password
+- **Sign In**: Existing users authenticate with credentials
+- **Session Management**: Authenticated sessions persist across requests
+
+### 2. File Upload for Initial Patterns
+
+#### File Format
+Pattern files must follow this exact structure:
+```text
+Generation 3:
+4 8
+........
+....*...
+...**...
+........
+```
+
+Where:
+- `.` represents a dead cell
+- `*` represents an alive cell
+- First line: `Generation N:` (with colon)
+- Second line: `rows columns` (space-separated)
+- Following lines: grid pattern (one row per line)
+
+#### Validation Rules
+The system validates uploaded files against these constraints:
+
+**Generation Constraints:**
+- Must be greater than 0
+- Must be less than 1000
+
+**Dimension Constraints:**
+- Rows must be greater than 0
+- Rows must be less than 100
+- Columns must be greater than 0
+- Columns must be less than 100
+
+**Grid Coherence:**
+- The number of grid rows must match the declared row count
+- Each grid row must have exactly the declared column count
+- Only `.` (dead) and `*` (alive) characters are valid in the grid
+
+### 3. Grid Interaction
+
+After a file is uploaded:
+- **Grid dimensions are read-only** - cannot be modified manually
+- **Grid is displayed as a matrix** - visual representation of the pattern
+- **Cells are interactive** - click any cell to toggle between alive/dead states
+- **Changes are reflected immediately** - UI updates in real-time
+
+The grid dimensions come exclusively from the uploaded file's second line.
+
+### 4. Simulation Controls
+
+Controls are styled like a music player with four primary buttons:
+
+- **Play**️ ▶ - Starts automatic generation evolution at one-second intervals.
+- **Pause** ⏸ - Stops automatic evolution (preserves current state)
+- **Next Step** ⏭ - Advances exactly one generation manually
+- **Reset** 🔃 - Returns the grid to its initial uploaded state
+
+Control states:
+- During auto-play: Play, Next, and Reset are disabled; only Pause is active
+- When paused/stopped: All controls except Pause are enabled
 
 ## Common Commands
 
@@ -58,16 +127,6 @@ Based on requirements from [Extendi Game of Life](https://github.com/extendi/gam
 - **Caching**: Solid Cache
 - **WebSockets**: Solid Cable
 - **Deployment**: Kamal (Docker-based)
-
-### Game Logic (`app/services/game_of_life/`)
-
-The core game logic is implemented as POROs (Plain Old Ruby Objects) in the `GameOfLife` module:
-
-- **Cell** - Represents a single cell with alive/dead state and mutation methods (`live`, `die`)
-- **GameBoard** - 2D grid of cells, handles seeding, iteration, and state comparison. Includes `Enumerable` for cell traversal.
-- **Game** - Orchestrates the simulation: initializes board, runs evolution loop, detects termination conditions (barren board, static state, generation limit)
-
-The `cell_fate` method implements Conway's rules by counting live neighbors within grid bounds.
 
 ## Development Tools
 
