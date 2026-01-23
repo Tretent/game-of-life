@@ -1,4 +1,4 @@
-# Conway's Game of Life
+# Roberto's Game of Life
 
 This project is a web-based implementation of **Conway's Game of Life**.
 
@@ -83,7 +83,7 @@ Based on the required solution implementation, the application provides the foll
 
 To ensure code quality and functionality, the following tools are used:
 
-- **Tests**: Run the suite using `bin/rails test` (includes system tests with Capybara).
+- **Tests**: Run the suite using `bin/rails test` and `bin/rails test:system` (includes system tests with Capybara).
 - **Linting**: RuboCop is configured with the Omakase style. Run with `bin/rubocop`.
 - **Security**:
     - `bin/brakeman` for static analysis.
@@ -93,7 +93,7 @@ To ensure code quality and functionality, the following tools are used:
 ## Development Notes
 
 - **Email**: In development, sent emails can be viewed at `/letter_opener`.
-- **Infrastructure**: The project uses Rails 8's "Solid" stack, replacing Redis with SQLite-backed alternatives for Caching, Queuing, and Pub/Sub.
+- **Infrastructure**: The project uses Rails 8's "Solid" stack, replacing Redis with SQLite-backed alternatives.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
