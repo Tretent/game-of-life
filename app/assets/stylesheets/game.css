@@ -6,8 +6,11 @@
 .game-grid-container {
   overflow: auto;
   margin: 1rem 0;
-  display: flex;
-  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+}
+
+.game-grid-container .game-grid {
+  margin: 0 auto;
 }
 
 .game-grid {
@@ -156,7 +159,7 @@
   }
 
   .game-grid {
-    --cell-size: clamp(4px, 1.2vmin, 12px);
+    --cell-size: clamp(20px, 4vmin, 28px);
   }
 
   .control-btn {
