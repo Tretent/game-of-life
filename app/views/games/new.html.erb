@@ -1,0 +1,42 @@
+<h1>New game</h1>
+
+<%= form_with url: customize_games_path, method: :post, scope: :customize, data: { controller: "pattern-form" } do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, value: params.dig(:customize, :name), required: true, placeholder: "Enter game name", data: { pattern_form_target: "name", action: "input->pattern-form#updateSubmitState" } %>
+  </div>
+
+  <div>
+    <%= form.label :initial_state, "Pattern file" %>
+    <%= form.file_field :initial_state, accept: "text/plain", required: true, data: { pattern_form_target: "file", action: "change->pattern-form#validateFile" } %>
+    <p class="error" style="display: none;" data-pattern-form-target="fileError"></p>
+    <% if @error.present? %>
+      <p class="error"><%= @error %></p>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Next", class: "btn", data: { pattern_form_target: "submit" }, disabled: true %>
+    <%= link_to "Cancel", games_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>
+
+<hr>
+
+<h3>File format</h3>
+<ul>
+  <li>Generation must be greater than 0 and less than 1000</li>
+  <li>Rows must be less than 100</li>
+  <li>Columns must be less than 100</li>
+  <li>Use <code>*</code> for alive cells and <code>.</code> for dead cells</li>
+</ul>
+
+<h3>Example</h3>
+<pre>
+Generation 1:
+4 8
+........
+....*...
+...**...
+........
+</pre>
