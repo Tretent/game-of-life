@@ -29,6 +29,7 @@ export default class extends Controller {
         } catch (e) {
             this.showFileError("Could not read file")
             this.fileValid = false
+            this.updateSubmitState()
         }
 
         this.updateSubmitState()
