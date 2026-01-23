@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[ show destroy next_generation reset ]
+  before_action :set_game, only: %i[ show destroy ]
 
   def index
     @games = Current.user.games.where(draft: false)
@@ -45,9 +45,6 @@ class GamesController < ApplicationController
       handle_customize_get
     end
   end
-
-
-
 
 
 
