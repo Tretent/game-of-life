@@ -30,9 +30,9 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 2rem;
 }
 
 /* Typography */
@@ -226,6 +226,12 @@ input[type="submit"]:disabled:hover,
 }
 
 /* Responsive */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 1rem;
