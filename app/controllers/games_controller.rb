@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[ show destroy ]
+  before_action :set_game, only: %i[ show destroy next_generation reset ]
 
   def index
     @games = Current.user.games.where(draft: false)
@@ -9,6 +9,25 @@ class GamesController < ApplicationController
     # Clean up any abandoned draft when starting a new game
     Current.user.games.where(id: session[:draft_game_id], draft: true).destroy_all
     session.delete(:draft_game_id)
+  end
+
+  def create
+    @game = Current.user.games.find_by(id: session[:draft_game_id], draft: true)
+    unless @game
+      redirect_to new_game_path
+      return
+    end
+
+    @game.history = build_history_from_params(@game)
+    @game.draft = false
+
+    if @game.save
+      session.delete(:draft_game_id)
+      redirect_to @game
+    else
+      @draft = draft_data_from_game(@game)
+      render :customize, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -26,6 +45,11 @@ class GamesController < ApplicationController
       handle_customize_get
     end
   end
+
+
+
+
+
 
   private
 
@@ -74,7 +98,16 @@ class GamesController < ApplicationController
     }
   end
 
+  def build_history_from_params(game)
+    grid = JSON.parse(create_params[:grid])
+    Array.new(game.current_generation - 1, nil) << grid
+  end
+
   def customize_params
     params.expect(customize: [ :name, :initial_state ])
+  end
+
+  def create_params
+    params.expect(create: [ :grid ])
   end
 end

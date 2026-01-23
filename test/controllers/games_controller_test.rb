@@ -70,7 +70,25 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 3, draft_game.current_generation
   end
 
+  test "create finalizes draft game" do
+    # First create a draft
+    file = create_pattern_file(generation: 1, rows: 2, columns: 2, grid: [ [ true, false ], [ false, true ] ])
+    post customize_games_path, params: { customize: { name: "Test Game", initial_state: file } }
 
+    draft_game = Game.last
+    assert draft_game.draft
+
+    # Now finalize it with grid as JSON
+    post games_path, params: {
+      create: {
+        grid: [ [ true, false ], [ false, true ] ].to_json
+      }
+    }
+
+    assert_redirected_to game_path(draft_game)
+    draft_game.reload
+    assert_not draft_game.draft
+  end
 
   private
 
