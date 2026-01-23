@@ -8,6 +8,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "Email", with: user.email_address
     fill_in "Password", with: password
     click_button "Sign in"
-    assert_no_selector "h1", text: "Sign in"
+    assert_no_selector "h2", text: "Sign in"
   end
 end
