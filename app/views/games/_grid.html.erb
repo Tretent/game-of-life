@@ -1,0 +1,9 @@
+<table class="game-grid">
+  <% grid.each do |row| %>
+    <tr>
+      <% row.each do |cell| %>
+        <td class="<%= cell ? 'alive' : 'dead' %>"></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

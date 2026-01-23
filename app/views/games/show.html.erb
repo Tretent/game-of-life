@@ -1,0 +1,25 @@
+<h1><%= @game.name %></h1>
+
+<div class="game-info">
+  <p><strong>Generation:</strong>
+    <span id="generation_count"><%= @game.current_generation %></span>
+  </p>
+  <p><strong>Size:</strong> <%= @game.rows %> rows x <%= @game.columns %> columns</p>
+</div>
+
+<div class="game-grid-container" id="game_grid">
+  <%= render "grid", grid: @game.current_grid %>
+</div>
+
+<div class="game-controls">
+  <div class="control-group">
+    <button type="button" class="control-btn" title="Play">&#9654;</button>
+    <button type="button" class="control-btn" title="Pause">&#10074;&#10074;</button>
+    <button type="button" class="control-btn" title="Next">&#9654;&#10074;</button>
+  </div>
+  <div class="control-group">
+    <button type="button" class="control-btn" title="Reset">&#8635;</button>
+  </div>
+</div>
+
+<p><%= link_to "Back to games", games_path %></p>
