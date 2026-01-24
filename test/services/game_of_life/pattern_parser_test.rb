@@ -84,6 +84,16 @@ module GameOfLife
       assert_match(/Generation must be less than 1000/, error.message)
     end
 
+    test "raises error when rows is 0" do
+      content = "Generation 1:\n0 3\n"
+
+      error = assert_raises(PatternParser::ParseError) do
+        PatternParser.parse(content)
+      end
+
+      assert_match(/Rows must be at least 1/, error.message)
+    end
+
     test "raises error when rows is 100 or more" do
       rows = "." * 10
       grid = ([ rows ] * 100).join("\n")
@@ -94,6 +104,16 @@ module GameOfLife
       end
 
       assert_match(/Rows must be less than 100/, error.message)
+    end
+
+    test "raises error when columns is 0" do
+      content = "Generation 1:\n3 0\n\n\n"
+
+      error = assert_raises(PatternParser::ParseError) do
+        PatternParser.parse(content)
+      end
+
+      assert_match(/Columns must be at least 1/, error.message)
     end
 
     test "raises error when columns is 100 or more" do
@@ -178,6 +198,21 @@ module GameOfLife
       end
 
       assert_match(/5 columns, expected 4/, error.message)
+    end
+
+    test "raises error when grid contains invalid characters" do
+      content = <<~PATTERN
+        Generation 1:
+        2 3
+        ...
+        .X.
+      PATTERN
+
+      error = assert_raises(PatternParser::ParseError) do
+        PatternParser.parse(content)
+      end
+
+      assert_match(/Row 2 contains invalid characters/, error.message)
     end
 
     test "parses file upload" do

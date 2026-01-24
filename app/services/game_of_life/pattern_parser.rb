@@ -53,7 +53,9 @@ module GameOfLife
 
       rows = match[1].to_i
       columns = match[2].to_i
+      raise ParseError, "Rows must be at least 1" if rows < 1
       raise ParseError, "Rows must be less than 100" if rows >= 100
+      raise ParseError, "Columns must be at least 1" if columns < 1
       raise ParseError, "Columns must be less than 100" if columns >= 100
 
       [ rows, columns ]
@@ -64,6 +66,7 @@ module GameOfLife
 
       lines.map.with_index do |line, index|
         raise ParseError, "Row #{index + 1} has #{line.length} columns, expected #{expected_columns}" if line.length != expected_columns
+        raise ParseError, "Row #{index + 1} contains invalid characters (only . and * allowed)" unless line.match?(/\A[.*]+\z/)
 
         line.chars.map { |char| char == "*" }
       end
