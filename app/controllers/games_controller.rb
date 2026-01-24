@@ -6,9 +6,7 @@ class GamesController < ApplicationController
   end
 
   def new
-    # Clean up any abandoned draft when starting a new game
-    Current.user.games.where(id: session[:draft_game_id], draft: true).destroy_all
-    session.delete(:draft_game_id)
+    cleanup_abandoned_draft
   end
 
   def create
@@ -18,7 +16,10 @@ class GamesController < ApplicationController
       return
     end
 
-    @game.history = build_history_from_params(@game)
+    grid = JSON.parse(create_params[:grid])
+    GameOfLife::GridValidator.validate!(grid, expected_rows: @game.rows, expected_columns: @game.columns)
+
+    @game.history = Game.build_history(@game.current_generation, grid)
     @game.draft = false
 
     if @game.save
@@ -28,6 +29,10 @@ class GamesController < ApplicationController
       @draft = draft_data_from_game(@game)
       render :customize, status: :unprocessable_entity
     end
+  rescue GameOfLife::GridValidator::ValidationError => e
+    @draft = draft_data_from_game(@game)
+    @error = e.message
+    render :customize, status: :unprocessable_entity
   end
 
   def show
@@ -47,23 +52,11 @@ class GamesController < ApplicationController
   end
 
   def next_generation
-    next_grid = GameOfLife::Evolution.next_generation(@game.current_grid)
-    @game.history << next_grid
-    @game.save!
-
-    respond_to do |format|
-      format.turbo_stream
-    end
+    @game.advance_generation!
   end
 
   def reset
-    first_index = @game.history.index(&:itself)
-    @game.history = @game.history[..first_index]
-    @game.save!
-
-    respond_to do |format|
-      format.turbo_stream
-    end
+    @game.reset_to_initial!
   end
 
   private
@@ -75,15 +68,11 @@ class GamesController < ApplicationController
   def handle_customize_post
     result = GameOfLife::PatternParser.parse_file(customize_params[:initial_state])
 
-    # Clean up any existing draft for this session
-    Current.user.games.where(id: session[:draft_game_id], draft: true).destroy_all
-
-    @game = Current.user.games.create!(
+    cleanup_abandoned_draft
+    @game = Game.create_draft_from_parse_result(
+      user: Current.user,
       name: customize_params[:name],
-      rows: result[:rows],
-      columns: result[:columns],
-      history: Array.new(result[:generation] - 1, nil) << result[:grid],
-      draft: true
+      result: result
     )
 
     session[:draft_game_id] = @game.id
@@ -113,9 +102,9 @@ class GamesController < ApplicationController
     }
   end
 
-  def build_history_from_params(game)
-    grid = JSON.parse(create_params[:grid])
-    Array.new(game.current_generation - 1, nil) << grid
+  def cleanup_abandoned_draft
+    Current.user.games.where(id: session[:draft_game_id], draft: true).destroy_all
+    session.delete(:draft_game_id)
   end
 
   def customize_params

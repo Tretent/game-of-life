@@ -1,5 +1,9 @@
 <h1>Customize game</h1>
 
+<% if @error.present? %>
+  <p class="error"><%= @error %></p>
+<% end %>
+
 <div class="game-info">
   <p><strong>Name:</strong> <%= @draft["name"] %></p>
   <p><strong>Generation:</strong> <%= @draft["generation"] %></p>

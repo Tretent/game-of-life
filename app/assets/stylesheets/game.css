@@ -3,6 +3,10 @@
  */
 
 /* Game grid */
+form:has(.game-grid-container) {
+  max-width: none;
+}
+
 .game-grid-container {
   overflow: auto;
   margin: 1rem 0;
