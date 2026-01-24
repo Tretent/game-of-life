@@ -15,7 +15,7 @@ The classical implementation of the Game of Life is an infinite, two-dimensional
 3. Any live cell with more than three live neighbours dies, as if by overpopulation.
 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-For this variant, the grid is considered to be finite and no life can exist off the edges.
+For this variant, **the grid is considered to be finite and no life can exist off the edges**.
 
 ## Key Features
 
@@ -25,14 +25,14 @@ For this variant, the grid is considered to be finite and no life can exist off 
 - **Matrix editing**: Users can edit the uploaded grid by clicking on cells to toggle their state.
 - **Server-Side Evolution**: All generation calculations are performed on the server to ensure logic consistency.
 - **Real-time Updates**: The UI reflects the state of the matrix at each iteration using modern Rails techniques (Turbo/Stimulus).
-- **Simulation Control**: A dedicated "Play" button to trigger and visualize the evolution process. "Pause" and "Step" buttons for fine-grained control.
+- **Simulation Control**: A dedicated **Play** button to trigger and visualize the evolution process. **Pause** and **Next** buttons for fine-grained control.
 
 ## Tech Stack
 
 - **Ruby**: 4.0.1
 - **Framework**: Rails 8.1.2
 - **Database**: SQLite3 (using `Solid Cache`, `Solid Queue`, and `Solid Cable` for modern Rails 8 defaults)
-- **Frontend**: Hotwire (Turbo & Stimulus) with Importmaps
+- **Frontend**: Hotwire (Turbo & Stimulus)
 - **Deployment**: Kamal 2 (Docker-based)
 
 ## Getting Started
@@ -40,7 +40,7 @@ For this variant, the grid is considered to be finite and no life can exist off 
 ### Prerequisites
 - Ruby 4.0.1 (managed via `mise` or your preferred version manager. See [mise documentation](https://mise.jdx.dev/getting-started.html))
 - SQLite3
-- Docker for production deployment (see Kamal guides)
+- Docker for production deployment (see [Kamal guides](https://kamal-deploy.org/docs/installation/))
 
 ### Installation
 1. Clone the repository:
@@ -62,16 +62,16 @@ For this variant, the grid is considered to be finite and no life can exist off 
 
 ## Usage Guide
 
-Based on the required solution implementation, the application provides the following functionality:
+Based on the aforementioned specifications, the application provides the following functionality:
 
 ### 1. Grid Interaction
 - **Define Grid Size**: Users can specify the dimensions of the grid (number of rows and columns) via file input.
 - **Define generation**: Users can specify the current generation to start the simulation from via file input.
 - **Define a name**: Users can specify a name for the simulation.
-- **Manual Toggle**: You can click on individual cells to toggle their state between *alive* and *dead* before starting the simulation.
+- **Manual Toggle**: Users can click on individual cells to toggle their state between *alive* and *dead* before starting the simulation.
 
 ### 2. Simulation Control
-- **Next Step**: Manually evolve the grid by one generation.
+- **Next**: Manually evolve the grid by one generation.
 - **Play/Pause**: Start an automated simulation that evolves at a set interval, or pause it at any time to inspect the current state.
 - **Reset**: Clear the grid or return to the initial state.
 

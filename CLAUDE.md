@@ -11,9 +11,10 @@ Based on requirements from [Extendi Game of Life](https://github.com/extendi/gam
 
 ### Key Features
 - User authentication (sign in and sign up processes)
+- The sign up process comprehends email verification
 - File upload for initial patterns with validation
 - Grid interaction: cell toggling via click (dimensions read-only)
-- Simulation controls: Play, Pause, Next step, Reset (music player style)
+- Simulation controls: Play, Pause, Next, Reset (music player style)
 - Server-side evolution calculations
 - Real-time UI updates via Turbo/Stimulus
 
@@ -83,10 +84,10 @@ The grid dimensions come exclusively from the uploaded file's second line.
 
 Controls are styled like a music player with four primary buttons:
 
-- **Play**️ ▶ - Starts automatic generation evolution at one-second intervals.
-- **Pause** ⏸ - Stops automatic evolution (preserves current state)
-- **Next Step** ⏭ - Advances exactly one generation manually
-- **Reset** 🔃 - Returns the grid to its initial uploaded state
+- **Play**️ &#9205; - Starts automatic generation evolution at one-second intervals.
+- **Pause** &#9208; - Stops automatic evolution (preserves current state)
+- **Next** &#9197; - Advances exactly one generation manually
+- **Reset** &#9198; - Returns the grid to its initial uploaded state
 
 Control states:
 - During auto-play: Play, Next, and Reset are disabled; only Pause is active
