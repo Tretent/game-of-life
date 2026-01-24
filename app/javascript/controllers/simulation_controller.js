@@ -2,8 +2,8 @@ import {Controller} from "@hotwired/stimulus"
 
 export default class extends Controller {
     static values = {
-        nextUrl: String,
-        resetUrl: String,
+        nextFormId: String,
+        resetFormId: String,
         maxGeneration: {type: Number, default: 1000}
     }
 
@@ -38,12 +38,12 @@ export default class extends Controller {
             this.updateButtonStates()
             return
         }
-        this.postRequest(this.nextUrlValue)
+        this.submitTurboForm(this.nextFormIdValue)
     }
 
     reset() {
         this.stopInterval()
-        this.postRequest(this.resetUrlValue)
+        this.submitTurboForm(this.resetFormIdValue)
         this.updateButtonStates()
     }
 
@@ -77,26 +77,17 @@ export default class extends Controller {
         this.resetBtnTarget.disabled = playing
     }
 
-    async postRequest(url) {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Accept": "text/vnd.turbo-stream.html",
-                "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
+    submitTurboForm(formId) {
+        const form = document.getElementById(formId)
+        if (!form) return
+
+        form.requestSubmit()
+
+        requestAnimationFrame(() => {
+            if (this.isAtMaxGeneration()) {
+                this.stopInterval()
+                this.updateButtonStates()
             }
         })
-
-        if (response.ok) {
-            const html = await response.text()
-            Turbo.renderStreamMessage(html)
-
-            // Check if we've reached the max generation after the DOM updates
-            requestAnimationFrame(() => {
-                if (this.isAtMaxGeneration()) {
-                    this.stopInterval()
-                    this.updateButtonStates()
-                }
-            })
-        }
     }
 }
