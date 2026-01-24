@@ -13,14 +13,8 @@ export default class extends Controller {
         const col = parseInt(td.dataset.col, 10)
 
         this.gridData[row][col] = !this.gridData[row][col]
-
-        if (this.gridData[row][col]) {
-            td.classList.remove("dead")
-            td.classList.add("alive")
-        } else {
-            td.classList.remove("alive")
-            td.classList.add("dead")
-        }
+        td.classList.toggle("alive")
+        td.classList.toggle("dead")
     }
 
     submitForm() {
