@@ -10,14 +10,14 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     user = User.create!(email_address: "unconfirmed@example.com", password: "password")
 
     assert_enqueued_email_with ConfirmationsMailer, :confirmation, args: [ user ] do
-      post confirmations_path, params: { confirmation: { email_address: user.email_address }}
+      post confirmations_path, params: { confirmation: { email_address: user.email_address } }
     end
 
     assert_redirected_to new_session_path
   end
 
   test "create does not reveal if user exists" do
-    post confirmations_path, params: { confirmation: { email_address: "nonexistent@example.com" }}
+    post confirmations_path, params: { confirmation: { email_address: "nonexistent@example.com" } }
 
     assert_redirected_to new_session_path
     assert_match /confirmation instructions sent/i, flash[:notice]
