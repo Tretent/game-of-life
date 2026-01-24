@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_22_151715) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_24_205304) do
   create_table "games", force: :cascade do |t|
-    t.integer "columns", default: 10
+    t.integer "columns"
     t.datetime "created_at", null: false
     t.boolean "draft", default: false, null: false
     t.json "history", default: []
     t.string "name"
-    t.integer "rows", default: 10
+    t.integer "rows"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_games_on_user_id"
