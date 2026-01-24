@@ -5,18 +5,21 @@
 # https://guides.rubyonrails.org/security.html#content-security-policy-header
 
 Rails.application.configure do
-  config.content_security_policy do |policy|
-    policy.default_src :self # same origin
-    policy.font_src    :self, :data # url
-    policy.img_src     :self, :data
-    policy.object_src  :none
-    policy.script_src  :self
-    policy.style_src   :self
-    policy.connect_src :self
-    policy.frame_ancestors :none
-  end
+  # Skip CSP in development to allow Letter Opener Web (uses iframes and inline styles)
+  unless Rails.env.development?
+    config.content_security_policy do |policy|
+      policy.default_src :self # same origin
+      policy.font_src    :self, :data # url
+      policy.img_src     :self, :data
+      policy.object_src  :none
+      policy.script_src  :self
+      policy.style_src   :self
+      policy.connect_src :self
+      policy.frame_ancestors :none
+    end
 
-  # Generate session nonces for permitted importmap, inline scripts, and inline styles.
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w[script-src style-src]
+    # Generate session nonces for permitted importmap, inline scripts, and inline styles.
+    config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+    config.content_security_policy_nonce_directives = %w[script-src style-src]
+  end
 end
