@@ -1,7 +1,7 @@
 <div class="auth-container">
   <h1>Resend confirmation</h1>
 
-  <%= form_with url: confirmations_path do |form| %>
+  <%= form_with url: confirmations_path, scope: :confirmation do |form| %>
     <div>
       <%= form.label :email_address, "Email" %>
       <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address" %>

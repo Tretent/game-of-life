@@ -1,13 +1,13 @@
 require "test_helper"
 
 class RegistrationsControllerTest < ActionDispatch::IntegrationTest
-  test "new" do
+  test "unauthenticated users may load new" do
     get new_registration_path
     assert_response :success
   end
 
   test "create with valid params" do
-    assert_difference("User.count") do
+    assert_difference("User.count", 1) do
       post registration_path, params: {
         user: {
           email_address: "newuser@example.com",
@@ -18,7 +18,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to new_session_path
-    assert_match /check your email/i, flash[:notice]
+    assert_match /Please check your email to confirm your account./i, flash[:notice]
 
     user = User.find_by(email_address: "newuser@example.com")
     assert_not user.confirmed?

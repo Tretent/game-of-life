@@ -6,7 +6,7 @@ class ConfirmationsController < ApplicationController
   end
 
   def create
-    if (user = User.find_by(email_address: params[:email_address]))
+    if (user = User.find_by(email_address: confirmation_params[:email_address]))
       if user.confirmed?
         redirect_to new_session_path, notice: "Your email is already confirmed. Please sign in."
       else
@@ -30,5 +30,11 @@ class ConfirmationsController < ApplicationController
       start_new_session_for user
       redirect_to root_path, notice: "Your email has been confirmed. Welcome!"
     end
+  end
+
+  private
+
+  def confirmation_params
+    params.expect(confirmation: [ :email_address ])
   end
 end
