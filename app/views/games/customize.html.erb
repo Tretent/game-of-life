@@ -7,7 +7,7 @@
 <div class="game-info">
   <p><strong>Name:</strong> <%= @draft["name"] %></p>
   <p><strong>Generation:</strong> <%= @draft["generation"] %></p>
-  <p><strong>Size:</strong> <%= @draft["rows"] %> rows x <%= @draft["columns"] %> columns</p>
+  <p><strong>Size:</strong> <%= game_size_display(@draft["rows"], @draft["columns"]) %></p>
 </div>
 
 <p>Click on cells to toggle them</p>
@@ -16,19 +16,7 @@
   <%= form.hidden_field :grid, value: @draft["grid"].to_json, data: { grid_editor_target: "gridInput" } %>
 
   <div class="game-grid-container">
-    <table class="game-grid game-grid--editable" data-grid-editor-target="grid">
-      <% @draft["grid"].each_with_index do |row, row_index| %>
-        <tr>
-          <% row.each_with_index do |cell, col_index| %>
-            <td class="<%= cell ? 'alive' : 'dead' %>"
-                data-action="click->grid-editor#toggleCell"
-                data-row="<%= row_index %>"
-                data-col="<%= col_index %>">
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
+    <%= render "editable_grid", grid: @draft["grid"] %>
   </div>
 
   <div class="form-actions">

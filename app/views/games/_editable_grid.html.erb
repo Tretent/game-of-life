@@ -1,0 +1,13 @@
+<table class="game-grid game-grid--editable" data-grid-editor-target="grid">
+  <% grid.each_with_index do |row, row_index| %>
+    <tr>
+      <% row.each_with_index do |cell, col_index| %>
+        <td class="<%= cell ? 'alive' : 'dead' %>"
+            data-action="click->grid-editor#toggleCell"
+            data-row="<%= row_index %>"
+            data-col="<%= col_index %>">
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
