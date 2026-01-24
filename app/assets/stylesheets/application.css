@@ -1,8 +1,8 @@
 /*
- * Game of Life - Base Application Styles
+ * Game of Life - Base Styles
  */
 
-/* Reset and base */
+/* Reset */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -39,20 +39,20 @@ body {
 h1 {
     font-size: 1.75rem;
     font-weight: 600;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.5rem;
     color: #222;
 }
 
 h2 {
     font-size: 1.25rem;
     font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.5rem;
 }
 
 h3 {
     font-size: 1rem;
     font-weight: 600;
-    margin: 1rem 0 0.5rem 0;
+    margin: 1rem 0 0.5rem;
 }
 
 p {
@@ -74,19 +74,19 @@ hr {
     margin: 1.5rem 0;
 }
 
-pre {
+pre, code {
     background-color: #f1f1f1;
-    padding: 1rem;
     border-radius: 4px;
-    overflow-x: auto;
     font-size: 0.875rem;
 }
 
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
 code {
-    background-color: #f1f1f1;
     padding: 0.125rem 0.25rem;
-    border-radius: 3px;
-    font-size: 0.875rem;
 }
 
 ul {
@@ -101,6 +101,13 @@ li {
 /* Forms */
 form {
     max-width: 400px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
 }
 
 input[type="text"],
@@ -128,13 +135,6 @@ input[type="file"] {
     padding: 0.5rem;
 }
 
-label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-    font-size: 0.875rem;
-}
-
 .form-actions {
     display: flex;
     gap: 0.5rem;
@@ -147,9 +147,7 @@ label {
 }
 
 /* Buttons */
-button,
-input[type="submit"],
-.btn {
+button, input[type="submit"], .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -164,9 +162,7 @@ input[type="submit"],
     transition: background-color 0.15s ease;
 }
 
-button:hover,
-input[type="submit"]:hover,
-.btn:hover {
+button:hover, input[type="submit"]:hover, .btn:hover {
     background-color: #0052a3;
     text-decoration: none;
 }
@@ -187,28 +183,13 @@ input[type="submit"]:hover,
     background-color: #c82333;
 }
 
-button:disabled,
-input[type="submit"]:disabled,
-.btn:disabled {
+button:disabled, input[type="submit"]:disabled, .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
-button:disabled:hover,
-input[type="submit"]:disabled:hover,
-.btn:disabled:hover {
-    background-color: #0066cc;
-}
-
-.btn-secondary:disabled:hover {
-    background-color: #6c757d;
-}
-
-.btn-danger:disabled:hover {
-    background-color: #dc3545;
-}
-
-/* Error messages */
+/* Messages */
 .error {
     color: #dc3545;
     margin: 0.5rem 0;

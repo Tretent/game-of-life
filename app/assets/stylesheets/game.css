@@ -1,178 +1,171 @@
 /*
- * Game of Life - Game-specific Styles
+ * Game of Life - Game Styles
  */
 
-/* Game grid */
+/* Grid */
 form:has(.game-grid-container) {
-  max-width: none;
+    max-width: none;
 }
 
 .game-grid-container {
-  overflow: auto;
-  margin: 1rem 0;
-  -webkit-overflow-scrolling: touch;
+    overflow: auto;
+    margin: 1rem 0;
+    -webkit-overflow-scrolling: touch;
 }
 
 .game-grid-container .game-grid {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 .game-grid {
-  --cell-size: clamp(6px, 1.5vmin, 20px);
-  border-collapse: collapse;
-  border: 1px solid #333;
+    --cell-size: clamp(6px, 1.5vmin, 20px);
+    border-collapse: collapse;
+    border: 1px solid #333;
 }
 
 .game-grid td {
-  width: var(--cell-size);
-  height: var(--cell-size);
-  min-width: var(--cell-size);
-  min-height: var(--cell-size);
-  max-width: var(--cell-size);
-  max-height: var(--cell-size);
-  border: 1px solid #ddd;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.game-grid--editable td {
-  cursor: pointer;
-}
-
-.game-grid--editable td:hover {
-  opacity: 0.7;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    min-width: var(--cell-size);
+    min-height: var(--cell-size);
+    border: 1px solid #ddd;
+    padding: 0;
 }
 
 .game-grid td.alive {
-  background-color: #333;
+    background-color: #333;
 }
 
 .game-grid td.dead {
-  background-color: #fff;
+    background-color: #fff;
 }
 
-/* Game controls */
+.game-grid--editable td {
+    cursor: pointer;
+}
+
+.game-grid--editable td:hover {
+    opacity: 0.7;
+}
+
+/* Controls */
 .game-controls {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
 }
 
 .control-group {
-  display: flex;
-  gap: 0.25rem;
+    display: flex;
+    gap: 0.25rem;
 }
 
 .control-btn {
-  width: 44px;
-  height: 44px;
-  font-size: 1.25rem;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.15s ease;
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
 }
 
 .control-btn:hover {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .control-btn:active {
-  background-color: #e0e0e0;
+    background-color: #e0e0e0;
 }
 
 .control-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.control-btn:disabled:hover {
-  background-color: #fff;
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* Game list */
 .game-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
 }
 
 .game-card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
 .game-card h2 {
-  margin: 0;
-  flex: 1;
-  min-width: 150px;
+    margin: 0;
+    flex: 1;
+    min-width: 150px;
 }
 
 .game-card-actions {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .game-card-actions form {
-  margin: 0;
+    margin: 0;
 }
 
 .game-card-actions .btn,
 .game-card-actions button {
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
-  min-width: 70px;
-  height: 32px;
-  box-sizing: border-box;
-  line-height: 1;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    min-width: 70px;
+    height: 32px;
+    line-height: 1;
 }
 
 /* Game info */
 .game-info {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 .game-info p {
-  margin: 0.25rem 0;
+    margin: 0.25rem 0;
 }
 
-/* Game responsive */
+/* Responsive */
 @media (max-width: 600px) {
-  .game-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .game-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .game-card-actions {
-    width: 100%;
-    justify-content: flex-start;
-  }
+    .game-card-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
 
-  .game-grid {
-    --cell-size: clamp(20px, 4vmin, 28px);
-  }
+    .game-grid {
+        --cell-size: clamp(20px, 4vmin, 28px);
+    }
 
-  .control-btn {
-    width: 48px;
-    height: 48px;
-  }
+    .control-btn {
+        width: 48px;
+        height: 48px;
+    }
 }
