@@ -28,22 +28,24 @@ export default class extends Controller {
     }
 
     pause() {
-        this.stopInterval()
-        this.updateButtonStates()
+        this.stopAndUpdate()
     }
 
     next() {
         if (this.isAtMaxGeneration()) {
-            this.stopInterval()
-            this.updateButtonStates()
+            this.stopAndUpdate()
             return
         }
         this.submitTurboForm(this.nextFormIdValue)
     }
 
     reset() {
-        this.stopInterval()
+        this.stopAndUpdate()
         this.submitTurboForm(this.resetFormIdValue)
+    }
+
+    stopAndUpdate() {
+        this.stopInterval()
         this.updateButtonStates()
     }
 
@@ -85,8 +87,7 @@ export default class extends Controller {
 
         requestAnimationFrame(() => {
             if (this.isAtMaxGeneration()) {
-                this.stopInterval()
-                this.updateButtonStates()
+                this.stopAndUpdate()
             }
         })
     }
