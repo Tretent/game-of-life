@@ -1,0 +1,4 @@
+<%= turbo_stream.update "generation_count", @game.current_generation %>
+<%= turbo_stream.update "game_grid" do %>
+  <%= render "grid", grid: @game.current_grid %>
+<% end %>

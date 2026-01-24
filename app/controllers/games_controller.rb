@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[ show destroy ]
+  before_action :set_game, only: %i[ show destroy next_generation reset ]
 
   def index
     @games = Current.user.games.where(draft: false)
@@ -46,7 +46,25 @@ class GamesController < ApplicationController
     end
   end
 
+  def next_generation
+    next_grid = GameOfLife::Evolution.next_generation(@game.current_grid)
+    @game.history << next_grid
+    @game.save!
 
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def reset
+    first_index = @game.history.index(&:itself)
+    @game.history = @game.history[..first_index]
+    @game.save!
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
 
   private
 

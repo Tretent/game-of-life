@@ -2,7 +2,7 @@
 
 <div class="game-info">
   <p><strong>Generation:</strong>
-    <span id="generation_count"><%= @game.current_generation %></span>
+    <span id="generation_count" data-generation="<%= @game.current_generation %>"><%= @game.current_generation %></span>
   </p>
   <p><strong>Size:</strong> <%= @game.rows %> rows x <%= @game.columns %> columns</p>
 </div>
@@ -11,14 +11,17 @@
   <%= render "grid", grid: @game.current_grid %>
 </div>
 
-<div class="game-controls">
+<div class="game-controls" data-controller="simulation"
+     data-simulation-next-url-value="<%= next_generation_game_path(@game) %>"
+     data-simulation-reset-url-value="<%= reset_game_path(@game) %>"
+     data-simulation-max-generation-value="1000">
   <div class="control-group">
-    <button type="button" class="control-btn" title="Play">&#9654;</button>
-    <button type="button" class="control-btn" title="Pause">&#10074;&#10074;</button>
-    <button type="button" class="control-btn" title="Next">&#9654;&#10074;</button>
+    <button type="button" class="control-btn" title="Play" data-action="click->simulation#play" data-simulation-target="playBtn">&#9654;</button>
+    <button type="button" class="control-btn" title="Pause" data-action="click->simulation#pause" data-simulation-target="pauseBtn" disabled>&#10074;&#10074;</button>
+    <button type="button" class="control-btn" title="Next" data-action="click->simulation#next" data-simulation-target="nextBtn">&#9654;&#10074;</button>
   </div>
   <div class="control-group">
-    <button type="button" class="control-btn" title="Reset">&#8635;</button>
+    <button type="button" class="control-btn" title="Reset" data-action="click->simulation#reset" data-simulation-target="resetBtn">&#8635;</button>
   </div>
 </div>
 
