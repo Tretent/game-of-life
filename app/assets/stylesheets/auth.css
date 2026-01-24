@@ -35,3 +35,11 @@
 .auth-links p {
   margin: 0.5rem 0;
 }
+
+/* Center alerts on auth pages */
+.container:has(.auth-container) > .notice,
+.container:has(.auth-container) > .alert {
+  max-width: 360px;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
