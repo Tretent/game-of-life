@@ -84,6 +84,6 @@ class GridEditorTest < ApplicationSystemTestCase
     file = Tempfile.new(%w[pattern .txt])
     file.write(content)
     file.rewind
-    attach_file "Pattern file", file.path
+    attach_file I18n.t("games.new.pattern_file"), file.path
   end
 end

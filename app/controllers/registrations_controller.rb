@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   allow_unauthenticated_access
-  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to registration_path, alert: "Try again later." }
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to registration_path, alert: t("registrations.create.rate_limited") }
 
   def new
     @user = User.new
@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       ConfirmationsMailer.confirmation(@user).deliver_later
-      redirect_to new_session_path, notice: "Please check your email to confirm your account."
+      redirect_to new_session_path, notice: t(".success")
     else
       render :new, status: :unprocessable_entity
     end

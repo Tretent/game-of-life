@@ -57,7 +57,7 @@ export default class extends Controller {
             return "Invalid header format. Expected: Generation N:"
         }
 
-        const generation = parseInt(headerMatch[1], 10)
+        const generation = Number.parseInt(headerMatch[1], 10)
         if (generation < 1) {
             return "Generation must be at least 1"
         }
@@ -71,8 +71,8 @@ export default class extends Controller {
             return "Invalid dimensions format. Expected: rows columns"
         }
 
-        const rows = parseInt(dimMatch[1], 10)
-        const columns = parseInt(dimMatch[2], 10)
+        const rows = Number.parseInt(dimMatch[1], 10)
+        const columns = Number.parseInt(dimMatch[2], 10)
 
         if (rows < 1) {
             return "Rows must be at least 1"

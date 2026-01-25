@@ -1,6 +1,6 @@
-<h1>My games</h1>
+<h1><%= t(".title") %></h1>
 
-<p><%= link_to "New game", new_game_path, class: "btn" %></p>
+<p><%= link_to t(".new_game"), new_game_path, class: "btn" %></p>
 
 <% if @games.any? %>
   <div class="game-list">
@@ -8,12 +8,12 @@
       <div class="game-card">
         <h2><%= link_to game.name, game_path(game) %></h2>
         <div class="game-card-actions">
-          <%= link_to "Play", game_path(game), class: "btn" %>
-          <%= button_to "Delete", game_path(game), method: :delete, class: "btn btn-danger", data: { turbo_confirm: "Are you sure? This cannot be undone." } %>
+          <%= link_to t(".play"), game_path(game), class: "btn" %>
+          <%= button_to t(".delete"), game_path(game), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t(".confirm_delete") } %>
         </div>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p>No games yet. Create your first one!</p>
+  <p><%= t(".no_games") %></p>
 <% end %>

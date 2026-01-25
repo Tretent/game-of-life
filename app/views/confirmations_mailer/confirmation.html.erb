@@ -1,8 +1,8 @@
 <p>
-  Welcome to Roberto's Game of Life! Please confirm your email by visiting
-  <%= link_to "this confirmation page", confirmation_url(@user.generate_token_for(:email_confirmation)) %>.
+  <%= t(".welcome") %>
+  <%= link_to t(".link_text"), confirmation_url(@user.generate_token_for(:email_confirmation)) %>.
 </p>
 
 <p>
-  This link will expire in 24 hours.
+  <%= t(".expiry", time: distance_of_time_in_words(0, @user.confirmation_token_expires_in)) %>
 </p>

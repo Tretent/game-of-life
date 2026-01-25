@@ -9,8 +9,8 @@ export default class extends Controller {
 
     toggleCell(event) {
         const td = event.currentTarget
-        const row = parseInt(td.dataset.row, 10)
-        const col = parseInt(td.dataset.col, 10)
+        const row = Number.parseInt(td.dataset.row, 10)
+        const col = Number.parseInt(td.dataset.col, 10)
 
         this.gridData[row][col] = !this.gridData[row][col]
         td.classList.toggle("alive")

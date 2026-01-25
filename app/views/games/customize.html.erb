@@ -1,16 +1,16 @@
-<h1>Customize game</h1>
+<h1><%= t(".title") %></h1>
 
 <% if @error.present? %>
   <p class="error"><%= @error %></p>
 <% end %>
 
 <div class="game-info">
-  <p><strong>Name:</strong> <%= @draft["name"] %></p>
-  <p><strong>Generation:</strong> <%= @draft["generation"] %></p>
-  <p><strong>Size:</strong> <%= game_size_display(@draft["rows"], @draft["columns"]) %></p>
+  <p><strong><%= t(".name") %></strong> <%= @draft["name"] %></p>
+  <p><strong><%= t(".generation") %></strong> <%= @draft["generation"] %></p>
+  <p><strong><%= t(".size") %></strong> <%= game_size_display(@draft["rows"], @draft["columns"]) %></p>
 </div>
 
-<p>Click on cells to toggle them</p>
+<p><%= t(".click_instruction") %></p>
 
 <%= form_with url: games_path, method: :post, scope: :create, data: { controller: "grid-editor", action: "submit->grid-editor#submitForm" } do |form| %>
   <%= form.hidden_field :grid, value: @draft["grid"].to_json, data: { grid_editor_target: "gridInput" } %>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-actions">
-    <%= form.submit "Create game", class: "btn" %>
-    <%= link_to "Back", new_game_path, class: "btn btn-secondary" %>
+    <%= form.submit t(".create"), class: "btn" %>
+    <%= link_to t(".back"), new_game_path, class: "btn btn-secondary" %>
   </div>
 <% end %>

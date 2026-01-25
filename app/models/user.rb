@@ -7,7 +7,9 @@ class User < ApplicationRecord
 
   validates :email_address, presence: true, uniqueness: true
 
-  generates_token_for :email_confirmation, expires_in: 24.hours do
+  CONFIRMATION_TOKEN_EXPIRY = 24.hours
+
+  generates_token_for :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRY do
     confirmed_at
   end
 
@@ -17,5 +19,9 @@ class User < ApplicationRecord
 
   def confirm!
     update!(confirmed_at: Time.current)
+  end
+
+  def confirmation_token_expires_in
+    CONFIRMATION_TOKEN_EXPIRY
   end
 end

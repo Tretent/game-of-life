@@ -1,22 +1,22 @@
 <div class="auth-container">
-  <h1 class="app-title">Roberto's Game of Life</h1>
-  <h2>Sign in</h2>
+  <h1 class="app-title"><%= t("app_name") %></h1>
+  <h2><%= t(".title") %></h2>
 
   <%= form_with url: session_path, scope: :session do |form| %>
     <div>
-      <%= form.label :email_address, "Email" %>
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
+      <%= form.label :email_address, t(".email") %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t(".email_placeholder"), value: params[:email_address] %>
     </div>
     <div>
-      <%= form.label :password %>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password" %>
+      <%= form.label :password, t(".password") %>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t(".password_placeholder") %>
     </div>
-    <%= form.submit "Sign in" %>
+    <%= form.submit t(".submit") %>
   <% end %>
 
   <div class="auth-links">
-    <p><%= link_to "Forgot password?", new_password_path %></p>
-    <p><%= link_to "Resend confirmation email", new_confirmation_path %></p>
-    <p>Don't have an account? <%= link_to "Register!", new_registration_path %></p>
+    <p><%= link_to t(".forgot_password"), new_password_path %></p>
+    <p><%= link_to t(".resend_confirmation"), new_confirmation_path %></p>
+    <p><%= t(".no_account") %> <%= link_to t(".register"), new_registration_path %></p>
   </div>
 </div>

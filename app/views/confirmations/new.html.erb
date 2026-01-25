@@ -1,15 +1,15 @@
 <div class="auth-container">
-  <h1>Resend confirmation</h1>
+  <h1><%= t(".title") %></h1>
 
   <%= form_with url: confirmations_path, scope: :confirmation do |form| %>
     <div>
-      <%= form.label :email_address, "Email" %>
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address" %>
+      <%= form.label :email_address, t(".email") %>
+      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t(".email_placeholder") %>
     </div>
-    <%= form.submit "Resend confirmation" %>
+    <%= form.submit t(".submit") %>
   <% end %>
 
   <div class="auth-links">
-    <p>Already confirmed? <%= link_to "Sign in", new_session_path %></p>
+    <p><%= t(".already_confirmed") %> <%= link_to t(".sign_in"), new_session_path %></p>
   </div>
 </div>

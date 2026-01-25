@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Game Of Life" %></title>
+    <title><%= content_for(:title) || t("layouts.application.title") %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Game Of Life">
+    <meta name="application-name" content="<%= t("layouts.application.title") %>">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -26,7 +26,7 @@
   <body>
     <% if authenticated? %>
       <header class="site-header">
-        <%= button_to "Logout", session_path, method: :delete, class: "btn btn-secondary" %>
+        <%= button_to t("layouts.application.logout"), session_path, method: :delete, class: "btn btn-secondary" %>
       </header>
     <% end %>
 

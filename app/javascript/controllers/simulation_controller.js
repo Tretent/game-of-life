@@ -64,7 +64,7 @@ export default class extends Controller {
         const generationElement = document.getElementById("generation_count")
         if (!generationElement) return false
 
-        const currentGeneration = parseInt(generationElement.textContent, 10)
+        const currentGeneration = Number.parseInt(generationElement.textContent, 10)
         return currentGeneration >= this.maxGenerationValue
     }
 

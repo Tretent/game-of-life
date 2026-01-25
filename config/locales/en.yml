@@ -28,4 +28,129 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  app_name: "Roberto's Game of Life"
+
+  layouts:
+    application:
+      title: "Game Of Life"
+      logout: "Logout"
+
+  games:
+    index:
+      title: "My games"
+      new_game: "New game"
+      play: "Play"
+      delete: "Delete"
+      confirm_delete: "Are you sure? This cannot be undone."
+      no_games: "No games yet. Create your first one!"
+    show:
+      back: "Back to games"
+    new:
+      title: "New game"
+      name_placeholder: "Enter game name"
+      pattern_file: "Starting state"
+      next: "Next"
+      cancel: "Cancel"
+      load_example: "Load example"
+      file_format: "File format"
+      example: "Example"
+      instructions:
+        generation: "Generation must be greater than 0 and less than 1000"
+        rows: "Rows (first digit) must be less than 100"
+        columns: "Columns (last digit) must be less than 100"
+        cells: "Use %{alive} for alive cells and %{dead} for dead cells"
+    customize:
+      title: "Customize game"
+      name: "Name:"
+      generation: "Generation:"
+      size: "Size:"
+      click_instruction: "Click on cells to toggle them"
+      create: "Create game"
+      back: "Back"
+    controls:
+      play: "Play"
+      pause: "Pause"
+      next: "Next"
+      reset: "Reset"
+    info:
+      generation: "Generation:"
+      size: "Size:"
+
+  sessions:
+    new:
+      title: "Sign in"
+      email: "Email"
+      email_placeholder: "Enter your email address"
+      password: "Password"
+      password_placeholder: "Enter your password"
+      submit: "Sign in"
+      forgot_password: "Forgot password?"
+      resend_confirmation: "Resend confirmation email"
+      no_account: "Don't have an account?"
+      register: "Register!"
+    create:
+      rate_limited: "Try again later."
+      unconfirmed: "Please confirm your email address first."
+      invalid: "Try another email address or password."
+
+  registrations:
+    new:
+      title: "Sign up"
+      email: "Email"
+      email_placeholder: "Enter your email address"
+      password: "Password"
+      password_placeholder: "Enter your password"
+      password_confirmation: "Confirm password"
+      password_confirmation_placeholder: "Confirm your password"
+      submit: "Sign up"
+      have_account: "Already have an account?"
+      sign_in: "Sign in"
+    create:
+      rate_limited: "Try again later."
+      success: "Please check your email to confirm your account."
+
+  passwords:
+    new:
+      title: "Forgot your password?"
+      email_placeholder: "Enter your email address"
+      submit: "Email reset instructions"
+    edit:
+      title: "Update your password"
+      password_placeholder: "Enter new password"
+      password_confirmation_placeholder: "Repeat new password"
+      submit: "Save"
+    create:
+      rate_limited: "Try again later."
+      success: "Password reset instructions sent (if user with that email address exists)."
+    update:
+      success: "Password has been reset."
+      mismatch: "Passwords did not match."
+      invalid_token: "Password reset link is invalid or has expired."
+
+  confirmations:
+    new:
+      title: "Resend confirmation"
+      email: "Email"
+      email_placeholder: "Enter your email address"
+      submit: "Resend confirmation"
+      already_confirmed: "Already confirmed?"
+      sign_in: "Sign in"
+    create:
+      rate_limited: "Try again later."
+      already_confirmed: "Your email is already confirmed. Please sign in."
+      success: "Confirmation instructions sent (if user with that email address exists)."
+    show:
+      invalid_token: "Confirmation link is invalid or has expired."
+      success: "Your email has been confirmed. Welcome!"
+
+  confirmations_mailer:
+    confirmation:
+      welcome: "Welcome to Roberto's Game of Life! Please confirm your email by visiting"
+      link_text: "this confirmation page"
+      expiry: "This link will expire in %{time}."
+
+  passwords_mailer:
+    reset:
+      intro: "You can reset your password on"
+      link_text: "this password reset page"
+      expiry: "This link will expire in %{time}."

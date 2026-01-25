@@ -17,21 +17,21 @@
   <% end %>
 
   <div class="control-group">
-    <button type="button" class="control-btn" title="Play"
+    <button type="button" class="control-btn" title="<%= t("games.controls.play") %>"
             data-action="click->simulation#play"
             data-simulation-target="playBtn">&#9205;
     </button>
-    <button type="button" class="control-btn" title="Pause"
+    <button type="button" class="control-btn" title="<%= t("games.controls.pause") %>"
             data-action="click->simulation#pause"
             data-simulation-target="pauseBtn" disabled>&#9208;
     </button>
-    <button type="button" class="control-btn" title="Next"
+    <button type="button" class="control-btn" title="<%= t("games.controls.next") %>"
             data-action="click->simulation#next"
             data-simulation-target="nextBtn">&#9197;
     </button>
   </div>
   <div class="control-group">
-    <button type="button" class="control-btn" title="Reset"
+    <button type="button" class="control-btn" title="<%= t("games.controls.reset") %>"
             data-action="click->simulation#reset"
             data-simulation-target="resetBtn">&#9198;
     </button>

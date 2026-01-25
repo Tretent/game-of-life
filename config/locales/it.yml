@@ -1,0 +1,174 @@
+it:
+  app_name: "Game of Life di Roberto"
+
+  layouts:
+    application:
+      title: "Game Of Life"
+      logout: "Logout"
+
+  games:
+    index:
+      title: "Le mie partite"
+      new_game: "Nuova partita"
+      play: "Gioca"
+      delete: "Elimina"
+      confirm_delete: "Sei sicuro? Non si torna indietro."
+      no_games: "Non c'è nessuna partita. Creane una!"
+    show:
+      back: "Ritorna alle partite"
+    new:
+      title: "Nuova partita"
+      name_placeholder: "Inserisci in nome della partita"
+      pattern_file: "Stato iniziale"
+      next: "Prosegui"
+      cancel: "Cancella"
+      load_example: "Carica esempio"
+      file_format: "Formato del file"
+      example: "Esempio"
+      instructions:
+        generation: "Generation deve essere maggiore di 0 e minore di 1000"
+        rows: "Il numero di righe (prima cifra) deve essere minore di 100"
+        columns: "Il numero di colonne (ultima cifra) deve essere minore di 100"
+        cells: "Usa %{alive} per le celle vive e %{dead} per le celle morte"
+    customize:
+      title: "Personalizza la partita"
+      name: "Nome:"
+      generation: "Generazione:"
+      size: "Dimensione:"
+      click_instruction: "Clicca sulla cella per invertirne il valore"
+      create: "Crea partita"
+      back: "Indietro"
+    controls:
+      play: "Play"
+      pause: "Pausa"
+      next: "Successivo"
+      reset: "Inizializza"
+    info:
+      generation: "Generazione:"
+      size: "Dimensione:"
+
+  sessions:
+    new:
+      title: "Autenticazione"
+      email: "Email"
+      email_placeholder: "Inserisci la tua email"
+      password: "Password"
+      password_placeholder: "Inserisci la tua password"
+      submit: "Sign in"
+      forgot_password: "Dimenticato la password?"
+      resend_confirmation: "Reinvia la email di conferma"
+      no_account: "Non hai un account?"
+      register: "Registrati!"
+    create:
+      rate_limited: "Riprova più tardi."
+      unconfirmed: "Si prega di confermare la propria email."
+      invalid: "Ritenta con una diversa email o password."
+
+  registrations:
+    new:
+      title: "Registrati"
+      email: "Email"
+      email_placeholder: "Inserisci la tua email"
+      password: "Password"
+      password_placeholder: "Inserisci la tua password"
+      password_confirmation: "Conferma password"
+      password_confirmation_placeholder: "Conferma la tua password"
+      submit: "Registrati"
+      have_account: "Hai già un account?"
+      sign_in: "Sign in"
+    create:
+      rate_limited: "Riprova più tardi."
+      success: "Si prega di controllare la propria email per confermare l'account."
+
+  passwords:
+    new:
+      title: "Dimenticato la password??"
+      email_placeholder: "Inserisci la tua email"
+      submit: "Invia istruzioni via email"
+    edit:
+      title: "Aggiorna la tua password"
+      password_placeholder: "Inserisci una nuova password"
+      password_confirmation_placeholder: "Ripeti la nuova password"
+      submit: "Salva"
+    create:
+      rate_limited: "Riprova più tardi."
+      success: "Le istruzioni per il reset della password sono state inviate (se l'utente corrispondente esiste)."
+    update:
+      success: "La password è stata reimpostata."
+      mismatch: "Le password non corrispondono."
+      invalid_token: "Il link per la reimpostazione della password non è valido o è scaduto."
+
+  confirmations:
+    new:
+      title: "Reinvia conferma"
+      email: "Email"
+      email_placeholder: "Inserisci la tua email"
+      submit: "Reinvia conferma"
+      already_confirmed: "Hai già confermato?"
+      sign_in: "Sign in"
+    create:
+      rate_limited: "Riprova più tardi."
+      already_confirmed: "La tua email è già stata confermata. Si prega di accedere."
+      success: "Le istruzioni per la conferma sono state inviate (se l'utente corrispondente esiste)."
+    show:
+      invalid_token: "Il link di conferma non è valido o è scaduto."
+      success: "La tua email è stata confermata. Benvenuto!"
+
+  confirmations_mailer:
+    confirmation:
+      welcome: "Benvenuto al Game of Life di Roberto! Su prega di confermare la propria mail visitando"
+      link_text: "questa pagina di conferma"
+      expiry: "Questo link scadrà entro %{time}."
+
+  passwords_mailer:
+    reset:
+      intro: "Puoi reimpostare la tua password visitando"
+      link_text: "questa pagina"
+      expiry: "Questo link scadrà entro %{time}."
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "mezzo minuto"
+      less_than_x_seconds:
+        one: "meno di un secondo"
+        other: "meno di %{count} secondi"
+      x_seconds:
+        one: "un secondo"
+        other: "%{count} secondi"
+      less_than_x_minutes:
+        one: "meno di un minuto"
+        other: "meno di %{count} minuti"
+      x_minutes:
+        one: "un minuto"
+        other: "%{count} minuti"
+      about_x_hours:
+        one: "circa un'ora"
+        other: "about %{count} hours"
+      x_days:
+        one: "un giorno"
+        other: "%{count} giorni"
+      about_x_months:
+        one: "circa un mese"
+        other: "circa %{count} mesi"
+      x_months:
+        one: "un mese"
+        other: "%{count} mesi"
+      about_x_years:
+        one: "circa un anno"
+        other: "circa %{count} anni"
+      over_x_years:
+        one: "più di un anno"
+        other: "più di %{count} anni"
+      almost_x_years:
+        one: "quasi un anno"
+        other: "quasi %{count} anni"
+    prompts:
+      year: "Anno"
+      month: "Mese"
+      day: "Giorno"
+      hour: "Ora"
+      minute: "Minuto"
+      second: "Secondi"
+    relative:
+      future: "in %{time}"
+      past: "%{time} fa"
