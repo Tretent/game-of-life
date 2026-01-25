@@ -6,7 +6,7 @@
 
 Rails.application.configure do
   # Skip CSP in development to allow Letter Opener Web (uses iframes and inline styles)
-  if !Rails.env.development? || !Rails.env.test?
+  if Rails.env.production?
     config.content_security_policy do |policy|
       policy.default_src :self # same origin
       policy.font_src    :self, :data # url
