@@ -5,9 +5,20 @@ one:
   rows: 10
   columns: 15
   user: one
+  draft: false
 
 two:
   name: Second game
   rows: 20
   columns: 5
   user: one
+  draft: false
+
+# Blinker pattern - oscillates between horizontal and vertical
+blinker:
+  name: Blinker
+  rows: 3
+  columns: 3
+  history: <%= [[[false, true, false], [false, true, false], [false, true, false]]].to_json %>
+  user: one
+  draft: false
