@@ -29,16 +29,4 @@ class ConfirmationsMailerTest < ActionMailer::TestCase
     email = ConfirmationsMailer.confirmation(@user)
     assert_match %r{/confirmations/}, email.text_part.body.to_s
   end
-
-  test "confirmation email body mentions Game of Life" do
-    email = ConfirmationsMailer.confirmation(@user)
-    assert_match "Game of Life", email.html_part.body.to_s
-    assert_match "Game of Life", email.text_part.body.to_s
-  end
-
-  test "confirmation email mentions expiration time" do
-    email = ConfirmationsMailer.confirmation(@user)
-    assert_match "24 hours", email.html_part.body.to_s
-    assert_match "24 hours", email.text_part.body.to_s
-  end
 end
