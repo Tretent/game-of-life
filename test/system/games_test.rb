@@ -5,6 +5,25 @@ class GamesTest < ApplicationSystemTestCase
     @user = users(:one)
   end
 
+  test "load example button loads valid pattern file" do
+    sign_in_as(@user)
+    visit new_game_path
+    fill_in "Name", with: "Example Game"
+
+    # Initially Next button should be disabled
+    assert_button "Next", disabled: true
+
+    # Click Load example button
+    click_button "Load example"
+
+    # Next button should now be enabled (valid file loaded)
+    assert_button "Next", disabled: false
+
+    # Should be able to proceed to customize page
+    click_button "Next"
+    assert_selector "h1", text: "Customize game"
+  end
+
   test "next button disabled after loading invalid file following valid file" do
     sign_in_as(@user)
 

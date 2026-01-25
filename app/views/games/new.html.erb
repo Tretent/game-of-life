@@ -18,6 +18,7 @@
   <div class="form-actions">
     <%= form.submit "Next", class: "btn", data: { pattern_form_target: "submit" }, disabled: true %>
     <%= link_to "Cancel", games_path, class: "btn btn-secondary" %>
+    <button type="button" class="btn" data-action="pattern-form#loadExample">Load example</button>
   </div>
 <% end %>
 

@@ -124,4 +124,20 @@ export default class extends Controller {
         this.fileErrorTarget.style.display = "none"
         this.fileValid = false
     }
+
+    loadExample() {
+        const exampleContent = `Generation 1:
+4 8
+........
+....*...
+...**...
+........`
+
+        const file = new File([exampleContent], "example.txt", { type: "text/plain" })
+        const dataTransfer = new DataTransfer()
+        dataTransfer.items.add(file)
+        this.fileTarget.files = dataTransfer.files
+
+        this.validateFile()
+    }
 }
