@@ -8,6 +8,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "Email", with: user.email_address
     fill_in "Password", with: password
     click_button "Sign in"
-    assert_button "Logout"
+    assert_button "Logout" # Wait for positive sign-in confirmation
   end
 end
