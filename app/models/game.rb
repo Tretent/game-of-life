@@ -19,12 +19,17 @@ class Game < ApplicationRecord
   end
 
   def reset_to_initial!
+    return if history.nil?
+
     first_index = history.index(&:itself)
     self.history = history[..first_index]
     save!
   end
 
   def self.build_history(generation, grid)
+    raise ArgumentError, "generation must be greater than 0" unless generation > 0
+    raise ArgumentError, "generation must be less than 1000" unless generation < 1000
+
     Array.new(generation - 1, nil) << grid
   end
 
