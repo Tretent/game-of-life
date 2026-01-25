@@ -4,6 +4,7 @@ class PasswordsController < ApplicationController
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: t("passwords.create.rate_limited") }
 
   def new
+    # default behaviour
   end
 
   def create
@@ -15,6 +16,7 @@ class PasswordsController < ApplicationController
   end
 
   def edit
+    # default behaviour
   end
 
   def update

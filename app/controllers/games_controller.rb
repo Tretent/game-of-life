@@ -36,6 +36,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    # default behaviour
   end
 
   def destroy
