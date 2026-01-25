@@ -4,7 +4,16 @@ export default class extends Controller {
     static targets = ["name", "file", "submit", "fileError"]
 
     connect() {
+        this.fileValid = false
         this.updateSubmitState()
+    }
+
+    updateSubmitState() {
+        const nameValid = this.nameTarget.value.trim().length > 0
+        const fileSelected = this.fileTarget.files.length > 0
+        const fileValid = this.fileValid === true
+
+        this.submitTarget.disabled = !(nameValid && fileSelected && fileValid)
     }
 
     async validateFile() {
@@ -12,6 +21,7 @@ export default class extends Controller {
 
         const file = this.fileTarget.files[0]
         if (!file) {
+            this.fileValid = false
             this.updateSubmitState()
             return
         }
@@ -33,6 +43,12 @@ export default class extends Controller {
         }
 
         this.updateSubmitState()
+    }
+
+    clearFileError() {
+        this.fileErrorTarget.textContent = ""
+        this.fileErrorTarget.style.display = "none"
+        this.fileValid = false
     }
 
     validatePatternContent(content) {
@@ -97,26 +113,12 @@ export default class extends Controller {
         return null // Valid
     }
 
-    updateSubmitState() {
-        const nameValid = this.nameTarget.value.trim().length > 0
-        const fileSelected = this.fileTarget.files.length > 0
-        const fileValid = this.fileValid === true
-
-        this.submitTarget.disabled = !(nameValid && fileSelected && fileValid)
-    }
-
     showFileError(message) {
         this.fileErrorTarget.textContent = message
         this.fileErrorTarget.style.display = "block"
     }
 
-    clearFileError() {
-        this.fileErrorTarget.textContent = ""
-        this.fileErrorTarget.style.display = "none"
-        this.fileValid = false
-    }
-
-    loadExample() {
+    async loadExample() {
         const exampleContent = `Generation 1:
 4 8
 ........
@@ -129,6 +131,6 @@ export default class extends Controller {
         dataTransfer.items.add(file)
         this.fileTarget.files = dataTransfer.files
 
-        this.validateFile()
+        await this.validateFile()
     }
 }

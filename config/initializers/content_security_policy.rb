@@ -6,7 +6,7 @@
 
 Rails.application.configure do
   # Skip CSP in development to allow Letter Opener Web (uses iframes and inline styles)
-  unless Rails.env.development?
+  if !Rails.env.development? || !Rails.env.test?
     config.content_security_policy do |policy|
       policy.default_src :self # same origin
       policy.font_src    :self, :data # url
@@ -18,8 +18,8 @@ Rails.application.configure do
       policy.frame_ancestors :none
     end
 
-    # Generate session nonces for permitted importmap, inline scripts, and inline styles.
-    config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+    # Generate nonces for permitted importmap, inline scripts, and inline styles.
+    config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
     config.content_security_policy_nonce_directives = %w[script-src style-src]
   end
 end

@@ -12,7 +12,10 @@
 
 <p><%= t(".click_instruction") %></p>
 
-<%= form_with url: games_path, method: :post, scope: :create, data: { controller: "grid-editor", action: "submit->grid-editor#submitForm" } do |form| %>
+<%= form_with url: games_path,
+              method: :post,
+              scope: :create,
+              data: { controller: "grid-editor", action: "submit->grid-editor#submitForm" } do |form| %>
   <%= form.hidden_field :grid, value: @draft["grid"].to_json, data: { grid_editor_target: "gridInput" } %>
 
   <div class="game-grid-container">
