@@ -17,7 +17,7 @@ export default class extends Controller {
         }
 
         try {
-            const content = await this.readFile(file)
+            const content = await file.text()
             const error = this.validatePatternContent(content)
 
             if (error) {
@@ -33,15 +33,6 @@ export default class extends Controller {
         }
 
         this.updateSubmitState()
-    }
-
-    readFile(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader()
-            reader.onload = (e) => resolve(e.target.result)
-            reader.onerror = () => reject(new Error("Failed to read file"))
-            reader.readAsText(file)
-        })
     }
 
     validatePatternContent(content) {
@@ -130,7 +121,7 @@ export default class extends Controller {
 4 8
 ........
 ....*...
-...**...
+*****...
 ........`
 
         const file = new File([exampleContent], "example.txt", { type: "text/plain" })
