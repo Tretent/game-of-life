@@ -26,6 +26,7 @@ class GamesController < ApplicationController
       session.delete(:draft_game_id)
       redirect_to @game
     else
+      @game.reload
       @draft = draft_data_from_game(@game)
       render :customize, status: :unprocessable_entity
     end

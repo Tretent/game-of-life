@@ -90,6 +90,49 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     assert_not draft_game.draft
   end
 
+  test "create keeps draft true when grid validation fails" do
+    # First create a draft
+    file = create_pattern_file(generation: 1, rows: 2, columns: 2, grid: [ [ true, false ], [ false, true ] ])
+    post customize_games_path, params: { customize: { name: "Test Game", initial_state: file } }
+
+    draft_game = Game.last
+    assert draft_game.draft
+
+    # Try to finalize with wrong grid dimensions (3x3 instead of 2x2)
+    post games_path, params: {
+      create: {
+        grid: [ [ true, false, true ], [ false, true, false ], [ true, false, true ] ].to_json
+      }
+    }
+
+    assert_response :unprocessable_entity
+    draft_game.reload
+    assert draft_game.draft, "Game should remain a draft after grid validation error"
+  end
+
+  test "create keeps draft true when model validation fails" do
+    # First create a draft
+    file = create_pattern_file(generation: 1, rows: 2, columns: 2, grid: [ [ true, false ], [ false, true ] ])
+    post customize_games_path, params: { customize: { name: "Test Game", initial_state: file } }
+
+    draft_game = Game.last
+    assert draft_game.draft
+
+    # Make the draft invalid by clearing the name
+    draft_game.update_column(:name, "")
+
+    # Try to finalize it
+    post games_path, params: {
+      create: {
+        grid: [ [ true, false ], [ false, true ] ].to_json
+      }
+    }
+
+    assert_response :unprocessable_entity
+    draft_game.reload
+    assert draft_game.draft, "Game should remain a draft after model validation error"
+  end
+
   private
 
   def build_grid(rows, columns)
