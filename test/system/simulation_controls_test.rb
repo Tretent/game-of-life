@@ -60,6 +60,8 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Reset"
 
+    # Wait for the Turbo stream to process - generation should no longer be 3
+    assert_no_selector "#generation_count", text: "3"
     assert_selector "#generation_count", text: "1"
   end
 
