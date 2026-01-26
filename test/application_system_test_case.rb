@@ -8,6 +8,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     fill_in "Email", with: user.email_address
     fill_in "Password", with: password
     click_button "Sign in"
-    assert_css ".account-button" # Wait for positive sign-in confirmation
+    # Wait for redirect away from login page (handles Turbo timing)
+    assert_no_selector "h2", text: "Sign in"
+    assert_css "body[data-authenticated='true']"
   end
 end
