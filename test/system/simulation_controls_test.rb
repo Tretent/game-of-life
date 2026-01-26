@@ -80,7 +80,12 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Reset"
 
-    # Wait for Turbo response - after reset: back to vertical blinker
+    # Wait for Turbo response - horizontal pattern should disappear first
+    within ".game-grid" do
+      assert_no_selector "tr:nth-child(2) td:nth-child(1).alive"
+    end
+
+    # After reset: back to vertical blinker
     within ".game-grid" do
       assert_selector "tr:nth-child(1) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
