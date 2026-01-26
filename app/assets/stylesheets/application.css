@@ -206,6 +206,81 @@ button:disabled, input[type="submit"]:disabled, .btn:disabled {
     margin: 0.5rem 0;
 }
 
+/* Account Dropdown */
+.account-dropdown {
+    position: relative;
+}
+
+.account-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: #6c757d;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.15s ease;
+}
+
+.account-button:hover {
+    background-color: #5a6268;
+}
+
+.account-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.account-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    z-index: 200;
+}
+
+.account-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.account-email {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #666;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.account-logout {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: #dc3545;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+
+.account-logout:hover {
+    background-color: #f8f8f8;
+    text-decoration: none;
+}
+
 /* Responsive */
 @media (min-width: 1400px) {
     .container {

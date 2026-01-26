@@ -33,6 +33,7 @@ en:
   layouts:
     application:
       title: "Game Of Life"
+      account: "Account"
       logout: "Logout"
 
   games:
