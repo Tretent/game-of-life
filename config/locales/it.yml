@@ -11,10 +11,18 @@ it:
     index:
       title: "Le mie partite"
       new_game: "Nuova partita"
+      about: "Cos'è?"
       play: "Gioca"
       delete: "Elimina"
       confirm_delete: "Sei sicuro? Non si torna indietro."
       no_games: "Non c'è nessuna partita. Creane una!"
+      rules:
+        title: "Il Gioco della Vita di Conway"
+        intro: "Il Gioco della Vita è un automa cellulare dove le celle su una griglia evolvono secondo semplici regole:"
+        underpopulation: "Ogni cella viva con meno di 2 vicini muore (sottopopolazione)"
+        survival: "Ogni cella viva con 2 o 3 vicini sopravvive alla prossima generazione"
+        overpopulation: "Ogni cella viva con piu di 3 vicini muore (sovrappopolazione)"
+        reproduction: "Ogni cella morta con esattamente 3 vicini diventa viva (riproduzione)"
     show:
       back: "Ritorna alle partite"
     new:

@@ -148,6 +148,52 @@ form:has(.game-grid-container) {
     margin: 0.25rem 0;
 }
 
+/* Index Actions */
+.index-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+/* Rules Modal */
+.rules-modal {
+    border: none;
+    border-radius: 8px;
+    padding: 0;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.rules-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.rules-modal-content {
+    padding: 1.5rem;
+}
+
+.rules-modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.rules-modal-content p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.rules-modal-content ol {
+    padding-left: 1.25rem;
+    margin: 0;
+}
+
+.rules-modal-content li {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .game-card {

@@ -40,10 +40,18 @@ en:
     index:
       title: "My games"
       new_game: "New game"
+      about: "What is this about?"
       play: "Play"
       delete: "Delete"
       confirm_delete: "Are you sure? This cannot be undone."
       no_games: "No games yet. Create your first one!"
+      rules:
+        title: "Conway's Game of Life"
+        intro: "The Game of Life is a cellular automaton where cells on a grid evolve based on simple rules:"
+        underpopulation: "Any live cell with fewer than 2 neighbors dies (underpopulation)"
+        survival: "Any live cell with 2 or 3 neighbors survives to the next generation"
+        overpopulation: "Any live cell with more than 3 neighbors dies (overpopulation)"
+        reproduction: "Any dead cell with exactly 3 neighbors becomes alive (reproduction)"
     show:
       back: "Back to games"
     new:

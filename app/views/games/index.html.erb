@@ -1,6 +1,22 @@
 <h1><%= t(".title") %></h1>
 
-<p><%= link_to t(".new_game"), new_game_path, class: "btn" %></p>
+<div class="index-actions" data-controller="modal">
+  <%= link_to t(".new_game"), new_game_path, class: "btn" %>
+  <%= link_to t(".about"), "#", data: { action: "click->modal#open" } %>
+
+  <dialog class="rules-modal" data-modal-target="dialog" data-action="click->modal#clickOutside">
+    <div class="rules-modal-content">
+      <h2><%= t(".rules.title") %></h2>
+      <p><%= t(".rules.intro") %></p>
+      <ol>
+        <li><%= t(".rules.underpopulation") %></li>
+        <li><%= t(".rules.survival") %></li>
+        <li><%= t(".rules.overpopulation") %></li>
+        <li><%= t(".rules.reproduction") %></li>
+      </ol>
+    </div>
+  </dialog>
+</div>
 
 <% if @games.any? %>
   <div class="game-list">
