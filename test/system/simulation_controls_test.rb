@@ -52,8 +52,9 @@ class SimulationControlsTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit game_path(@game)
 
-    # Advance a few generations
+    # Advance a few generations (wait for each Turbo response)
     click_button "Next"
+    assert_selector "#generation_count", text: "2"
     click_button "Next"
     assert_selector "#generation_count", text: "3"
 
@@ -68,7 +69,7 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Next"
 
-    # After next: horizontal blinker
+    # Wait for Turbo response - after next: horizontal blinker
     within ".game-grid" do
       assert_selector "tr:nth-child(2) td:nth-child(1).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
@@ -77,7 +78,7 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Reset"
 
-    # After reset: back to vertical blinker
+    # Wait for Turbo response - after reset: back to vertical blinker
     within ".game-grid" do
       assert_selector "tr:nth-child(1) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
@@ -104,6 +105,7 @@ class SimulationControlsTest < ApplicationSystemTestCase
     visit game_path(@game)
 
     click_button "Play"
+    assert_button "Pause", disabled: false  # Wait for play state
     click_button "Pause"
 
     # After pause: play, next, reset enabled; pause disabled
@@ -137,10 +139,11 @@ class SimulationControlsTest < ApplicationSystemTestCase
     visit game_path(@game)
 
     click_button "Play"
-    assert_button "Pause", disabled: false
+    assert_button "Pause", disabled: false  # Wait for play state
 
     # Must pause first since reset is disabled during playback
     click_button "Pause"
+    assert_button "Reset", disabled: false  # Wait for pause state
     click_button "Reset"
 
     # After reset: controls should be back to initial state

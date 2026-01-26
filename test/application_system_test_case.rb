@@ -5,11 +5,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def sign_in_as(user, password: "password")
     visit new_session_path
+    assert_selector "h2", text: "Sign in"  # Wait for form to load
+
     fill_in "Email", with: user.email_address
     fill_in "Password", with: password
+
     click_button "Sign in"
-    # Wait for redirect away from login page (handles Turbo timing)
-    assert_no_selector "h2", text: "Sign in"
-    assert_css "body[data-authenticated='true']"
+
+    # Wait for authenticated state - the definitive indicator of successful login
+    assert_css "body[data-authenticated='true']", wait: 10
   end
 end

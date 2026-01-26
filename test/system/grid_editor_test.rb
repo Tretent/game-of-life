@@ -69,8 +69,10 @@ class GridEditorTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit new_game_path
 
-    fill_in "Name", with: "Test Pattern"
+    # Attach file first, then fill name - avoids race condition where
+    # async validateFile() calls updateSubmitState() before name is set
     attach_pattern_file("Generation 1:\n3 3\n.*.\n.*.\n.*.")
+    fill_in "Name", with: "Test Pattern"
 
     # Wait for JS validation and submit
     assert_button "Next", disabled: false
