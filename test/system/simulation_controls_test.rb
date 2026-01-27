@@ -40,10 +40,13 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Next"
 
+    # Wait for Turbo response to update generation
+    assert_selector "#generation_count", text: "2", wait: 5
+
     # After one generation: horizontal blinker (row of 3)
     # The corner cell becoming alive indicates the pattern has changed
     within ".game-grid" do
-      assert_selector "tr:nth-child(2) td:nth-child(1).alive", wait: 5
+      assert_selector "tr:nth-child(2) td:nth-child(1).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(3).alive"
     end
@@ -74,19 +77,24 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Next"
 
-    # Wait for Turbo response - after next: horizontal blinker
+    # Wait for Turbo response to update generation
+    assert_selector "#generation_count", text: "2", wait: 5
+
+    # After next: horizontal blinker
     within ".game-grid" do
-      assert_selector "tr:nth-child(2) td:nth-child(1).alive", wait: 5
+      assert_selector "tr:nth-child(2) td:nth-child(1).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(3).alive"
     end
 
     click_button "Reset"
 
+    # Wait for Turbo response to reset generation
+    assert_selector "#generation_count", text: "1", wait: 5
+
     # After reset: back to vertical blinker
-    # The corner cell becoming dead indicates the pattern has reset
     within ".game-grid" do
-      assert_selector "tr:nth-child(2) td:nth-child(1).dead", wait: 5
+      assert_selector "tr:nth-child(2) td:nth-child(1).dead"
       assert_selector "tr:nth-child(1) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(3) td:nth-child(2).alive"

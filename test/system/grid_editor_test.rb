@@ -81,7 +81,6 @@ class GridEditorTest < ApplicationSystemTestCase
     assert_button "Next", disabled: false, wait: 5
     click_button "Next"
 
-    # Wait for navigation to complete
     assert_selector "h1", text: "Customize game", wait: 10
   end
 
@@ -90,5 +89,7 @@ class GridEditorTest < ApplicationSystemTestCase
     file.write(content)
     file.rewind
     attach_file I18n.t("games.new.pattern_file"), file.path
+    # Ensure the change event fires for Stimulus validation
+    page.execute_script("document.querySelector('input[type=file]').dispatchEvent(new Event('change'))")
   end
 end

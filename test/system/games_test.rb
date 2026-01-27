@@ -112,6 +112,8 @@ class GamesTest < ApplicationSystemTestCase
     file.write(content)
     file.rewind
     attach_file I18n.t("games.new.pattern_file"), file.path
+    # Ensure the change event fires for Stimulus validation
+    page.execute_script("document.querySelector('input[type=file]').dispatchEvent(new Event('change'))")
   end
 
   def assert_file_error(text)
