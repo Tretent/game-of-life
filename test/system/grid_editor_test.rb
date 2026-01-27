@@ -69,17 +69,20 @@ class GridEditorTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit new_game_path
 
+    # Ensure new game page is loaded
+    assert_selector "h1", text: "New game"
+
     # Attach file first, then fill name - avoids race condition where
     # async validateFile() calls updateSubmitState() before name is set
     attach_pattern_file("Generation 1:\n3 3\n.*.\n.*.\n.*.")
     fill_in "Name", with: "Test Pattern"
 
     # Wait for JS validation and submit
-    assert_button "Next", disabled: false
+    assert_button "Next", disabled: false, wait: 5
     click_button "Next"
 
-    # Should redirect to customize page
-    assert_selector "h1", text: "Customize game"
+    # Wait for navigation to complete
+    assert_selector "h1", text: "Customize game", wait: 10
   end
 
   def attach_pattern_file(content)

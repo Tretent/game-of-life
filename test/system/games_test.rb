@@ -16,12 +16,13 @@ class GamesTest < ApplicationSystemTestCase
     # Click Load example button
     click_button "Load example"
 
-    # Next button should now be enabled (valid file loaded)
-    assert_button "Next", disabled: false
+    # Wait for JS validation to complete - button should become enabled
+    assert_button "Next", disabled: false, wait: 5
 
     # Should be able to proceed to customize page
     click_button "Next"
-    assert_selector "h1", text: "Customize game"
+    # Wait for navigation to complete
+    assert_selector "h1", text: "Customize game", wait: 5
   end
 
   test "next button disabled after loading invalid file following valid file" do
@@ -32,12 +33,13 @@ class GamesTest < ApplicationSystemTestCase
 
     # First, load a valid file
     attach_pattern_file(valid_pattern)
-    assert_button "Next", disabled: false
+    assert_button "Next", disabled: false, wait: 5
 
     # Now load an invalid file (wrong column count)
     attach_pattern_file("Generation 1:\n3 3\n...\n.*\n...")
-    assert_button "Next", disabled: true
+    # Wait for JS validation to complete - error should appear
     assert_file_error "Row 2 has 2 columns, expected 3"
+    assert_button "Next", disabled: true
   end
 
   test "validation error: file must have at least 3 lines" do

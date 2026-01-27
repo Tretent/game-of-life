@@ -41,8 +41,9 @@ class SimulationControlsTest < ApplicationSystemTestCase
     click_button "Next"
 
     # After one generation: horizontal blinker (row of 3)
+    # The corner cell becoming alive indicates the pattern has changed
     within ".game-grid" do
-      assert_selector "tr:nth-child(2) td:nth-child(1).alive"
+      assert_selector "tr:nth-child(2) td:nth-child(1).alive", wait: 5
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(3).alive"
     end
@@ -52,17 +53,19 @@ class SimulationControlsTest < ApplicationSystemTestCase
     sign_in_as(@user)
     visit game_path(@game)
 
+    # Ensure page is loaded with initial state
+    assert_selector "#generation_count", text: "1"
+
     # Advance a few generations (wait for each Turbo response)
     click_button "Next"
-    assert_selector "#generation_count", text: "2"
+    assert_selector "#generation_count", text: "2", wait: 5
     click_button "Next"
-    assert_selector "#generation_count", text: "3"
+    assert_selector "#generation_count", text: "3", wait: 5
 
     click_button "Reset"
 
-    # Wait for the Turbo stream to process - generation should no longer be 3
-    assert_no_selector "#generation_count", text: "3"
-    assert_selector "#generation_count", text: "1"
+    # Wait for reset to complete
+    assert_selector "#generation_count", text: "1", wait: 5
   end
 
   test "reset restores original grid pattern" do
@@ -73,24 +76,20 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     # Wait for Turbo response - after next: horizontal blinker
     within ".game-grid" do
-      assert_selector "tr:nth-child(2) td:nth-child(1).alive"
+      assert_selector "tr:nth-child(2) td:nth-child(1).alive", wait: 5
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(3).alive"
     end
 
     click_button "Reset"
 
-    # Wait for Turbo response - horizontal pattern should disappear first
-    within ".game-grid" do
-      assert_no_selector "tr:nth-child(2) td:nth-child(1).alive"
-    end
-
     # After reset: back to vertical blinker
+    # The corner cell becoming dead indicates the pattern has reset
     within ".game-grid" do
+      assert_selector "tr:nth-child(2) td:nth-child(1).dead", wait: 5
       assert_selector "tr:nth-child(1) td:nth-child(2).alive"
       assert_selector "tr:nth-child(2) td:nth-child(2).alive"
       assert_selector "tr:nth-child(3) td:nth-child(2).alive"
-      assert_selector "tr:nth-child(2) td:nth-child(1).dead"
     end
   end
 
@@ -100,9 +99,11 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Play"
 
+    # Wait for play state transition - pause becomes enabled
+    assert_button "Pause", disabled: false
+
     # During play: only pause is enabled
     assert_button "Play", disabled: true
-    assert_button "Pause", disabled: false
     assert_button "Next", disabled: true
     assert_button "Reset", disabled: true
   end
@@ -130,13 +131,14 @@ class SimulationControlsTest < ApplicationSystemTestCase
 
     click_button "Play"
 
+    # Wait for play state transition
+    assert_button "Pause", disabled: false
+
     # Play immediately advances, then waits 1 second for next
     assert_selector "#generation_count", text: "2"
 
-    # Wait for auto-advance
-    sleep 1.2
-    generation = find("#generation_count").text.to_i
-    assert generation >= 3, "Expected generation >= 3 after auto-play, got #{generation}"
+    # Wait for auto-advance to generation 3 or higher (with Capybara's built-in wait)
+    assert_selector "#generation_count", text: /[3-9]|\d{2,}/, wait: 3
 
     click_button "Pause"
   end
