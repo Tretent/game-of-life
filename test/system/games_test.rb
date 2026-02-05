@@ -108,10 +108,11 @@ class GamesTest < ApplicationSystemTestCase
   end
 
   def attach_pattern_file(content)
-    file = Tempfile.new(%w[pattern .txt])
-    file.write(content)
-    file.rewind
-    attach_file I18n.t("games.new.pattern_file"), file.path
+    @pattern_file = Tempfile.new(%w[pattern .txt])
+    @pattern_file.write(content)
+    @pattern_file.flush
+    @pattern_file.rewind
+    attach_file I18n.t("games.new.pattern_file"), @pattern_file.path
     # Ensure the change event fires for Stimulus validation
     page.execute_script("document.querySelector('input[type=file]').dispatchEvent(new Event('change'))")
   end
