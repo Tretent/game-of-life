@@ -6,14 +6,12 @@
   <%= form_with url: next_generation_game_path(game),
                 method: :post,
                 id: dom_id(game, :next_generation_form),
-                hidden: true,
-                data: { turbo: true } do %>
+                hidden: true do %>
   <% end %>
   <%= form_with url: reset_game_path(game),
                 method: :post,
                 id: dom_id(game, :reset_form),
-                hidden: true,
-                data: { turbo: true } do %>
+                hidden: true do %>
   <% end %>
 
   <div class="control-group">
