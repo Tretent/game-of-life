@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Web-based implementation of **Conway's Game of Life** - Ruby on Rails 8.1 with Ruby 4.0.1.
+Web-based implementation of **Conway's Game of Life** - Ruby on Rails 8.1 (Ruby version: see `.ruby-version`).
 
 Based on requirements from [Extendi Game of Life](https://github.com/extendi/game-of-life).
 
@@ -121,6 +121,7 @@ Control states:
 
 ## Architecture
 
+- **Core game logic**: `app/services/game_of_life/` — `Evolution` (generation calculation), `PatternParser` (file parsing), `GridValidator` (upload validation)
 - **Database**: SQLite3 (stored in `storage/` directory)
 - **Asset Pipeline**: Propshaft
 - **JavaScript**: Importmap with Hotwire (Turbo + Stimulus)
